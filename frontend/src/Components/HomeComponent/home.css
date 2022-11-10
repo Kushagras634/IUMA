@@ -1,0 +1,60 @@
+
+.main-slider{
+  padding: 1rem 2rem;
+}
+
+.label {
+  font-family: var(--primaryFont);
+  font-size: var(--lableLarge);
+}
+
+.nav_tab:hover {
+  color: var(--primaryColor);
+}
+
+.main-display {
+  font-size: var(--displayLarge);
+  font-family: var(--primaryFont);
+  font-weight: 600;
+  margin: 0;
+}
+
+.main-title {
+  font-size: var(--titleLarge);
+  font-family: var(--primaryFont);
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.main-heading{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main-buttons{
+  padding: 3rem 0;
+}
+
+.main-buttons button{
+  padding: .75rem 2rem;
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.main-buttons button:first-child{
+  background-color: var(--primaryColor);
+  border: 3px solid var(--primaryColor);
+  color: white;
+
+}
+
+.main-buttons button:last-child{
+  background-color: white;
+  border: 3px solid var(--primaryColor);
+  color: var(--primaryColor);
+  
+}

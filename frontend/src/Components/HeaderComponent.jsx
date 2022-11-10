@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 const HeaderComponent = () => {
-    return (<div>
+    return (<header>
         <nav>
             <ul className='label container'>
                 <div style={{'border': '1px solid black', 'width':'10px', 'height': '10px'}}></div>
@@ -16,7 +16,7 @@ const HeaderComponent = () => {
                 </span></li>
             </ul>
         </nav>
-    </div> );
+    </header> );
 }
 
 export default HeaderComponent;

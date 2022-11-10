@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Appointments from './AppointmentsComponent';
 import Blogs from './BlogsComponent';
 import Doctors from './DoctorsComponent';
-import Home from './HomeComponent';
+import Home from './HomeComponent/HomeComponent';
 import Services from './ServicesComponent';
 
 const MainComponent = () => {
