@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from './HeaderComponent';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Appointments from './AppointmentsComponent';
-import Blogs from './BlogsComponent';
-import Doctors from './DoctorsComponent';
+import Appointments from './AppointmentsComponent/AppointmentsComponent';
+import Blogs from './BlogsComponent/BlogsComponent';
+import Doctors from './DoctorsComponent/DoctorsComponent';
 import Home from './HomeComponent/HomeComponent';
-import Services from './ServicesComponent';
+import Services from './ServicesComponent/ServicesComponent';
 
 const MainComponent = () => {
     return ( <>

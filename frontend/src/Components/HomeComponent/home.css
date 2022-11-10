@@ -4,7 +4,6 @@
 }
 
 .label {
-  font-family: var(--primaryFont);
   font-size: var(--lableLarge);
 }
 
@@ -21,10 +20,7 @@
 
 .main-title {
   font-size: var(--titleLarge);
-  font-family: var(--primaryFont);
   font-weight: 400;
-  margin: 0;
-  padding: 0;
 }
 
 .main-heading{
@@ -56,5 +52,14 @@
   background-color: white;
   border: 3px solid var(--primaryColor);
   color: var(--primaryColor);
-  
+  transition-duration: 1s;
+}
+
+.main-buttons button:first-child:hover {
+  box-shadow: 5px 5px 10px grey;
+}
+
+.main-buttons button:last-child:hover {
+  background-color: var(--primaryColor);
+  color: #fff;
 }

@@ -1,8 +1,28 @@
 import React from "react";
 import SvgComponent from "../mainSVGComponent";
-import './home.css'
+import './home.css';
+import Card from '../CardComponent/CardComponent';
+const cards = [
+  {
+    'heading': 'Instant Video Consultation',
+    'body': 'Connect within 60 sec'
+  },
+  {
+    'heading': 'Find Doctor Near You',
+    'body': 'Connect within 60 sec'
+  },
+  {
+    'heading': 'Order Medicine',
+    'body': 'Connect within 60 sec'
+  }
+];
 
 const HomeComponent = () => {
+  const list_card = () => cards.map((card) => {
+    return (<>
+      <Card data={card} />
+    </>);
+  })
   return (
     <main>
       <div className="container main-slider">
@@ -22,7 +42,9 @@ const HomeComponent = () => {
         <div className="main-svg">
           <SvgComponent/>
         </div>
-        <div className="image"></div>
+      </div>
+      <div className="container" style={{'padding': '2%'}}>
+        {list_card()}
       </div>
     </main>
   );
