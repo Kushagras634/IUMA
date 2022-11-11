@@ -2,6 +2,7 @@ import React from "react";
 import SvgComponent from "../mainSVGComponent";
 import './home.css';
 import Card from '../CardComponent/CardComponent';
+import Form from '../FormComponent/FormComponent';
 const cards = [
   {
     'heading': 'Instant Video Consultation',

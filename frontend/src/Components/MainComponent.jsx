@@ -6,6 +6,7 @@ import Blogs from './BlogsComponent/BlogsComponent';
 import Doctors from './DoctorsComponent/DoctorsComponent';
 import Home from './HomeComponent/HomeComponent';
 import Services from './ServicesComponent/ServicesComponent';
+import Login from './LoginComponent/LoginComponent';
 
 const MainComponent = () => {
     return ( <>
@@ -17,6 +18,7 @@ const MainComponent = () => {
                 <Route path='/doctors' element={<Doctors />} />
                 <Route path='/services' element={<Services />} />
                 <Route path='/appointments' element={<Appointments />} />
+                <Route path='/login' element={<Login />} />
             </Routes>
     </Router>
     </> );

@@ -4,7 +4,7 @@
 }
 
 .heading {
-    font-size: var(--headlineLarge);
+    font-size: var(--headlineSmall);
     font-weight: 400;
 }
 

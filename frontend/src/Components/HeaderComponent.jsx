@@ -11,9 +11,9 @@ const HeaderComponent = () => {
                 <li><Link className='nav_tab' to='/doctors'>Doctors</Link></li>
                 <li><Link className='nav_tab' to='/blogs'>Blogs</Link></li>
                 <li><Link className='nav_tab' to='/appointments'>Appointments</Link></li>
-                <li><span class="material-symbols-outlined">
+                <li><Link className='nav_tab' to='/login'><span class="material-symbols-outlined">
                     account_circle
-                </span></li>
+                </span></Link></li>
             </ul>
         </nav>
     </header> );

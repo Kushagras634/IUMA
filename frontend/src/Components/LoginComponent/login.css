@@ -1,0 +1,6 @@
+.heading {
+    font-size: var(--headlineLarge);
+    font-weight: 700;
+    text-align: center;
+    padding-top: 5%;
+}

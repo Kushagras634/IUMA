@@ -1,0 +1,10 @@
+.image {
+    width: 40%;
+}
+
+.field_box {
+    padding: 2%;
+    width: 100%;
+    border-radius: 50px;
+    border-width: 1px;
+}
