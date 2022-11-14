@@ -11,8 +11,8 @@ const LoginComponent = () => {
         <div className='heading'>
             <p>Log in</p>
         </div>
-        <div>
-            <Form fields={field_list} buton='Log in' />
+        <div style={{'paddingLeft':'2%'}}>
+            <Form fields={field_list} buton='Log in' image='doctor.png' />
         </div>
     </> );
 }

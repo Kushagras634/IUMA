@@ -3,11 +3,11 @@
     box-shadow: 10px 10px 20px grey;
 }
 
-.heading {
-    font-size: var(--headlineSmall);
+.card_body > .heading {
+    font-size: var(--headlineLarge);
     font-weight: 400;
 }
 
-.body {
+.card_body > .body {
     font-size: var(--bodyLarge);
 }
