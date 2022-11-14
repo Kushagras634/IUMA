@@ -7,6 +7,7 @@ import Doctors from './DoctorsComponent/DoctorsComponent';
 import Home from './HomeComponent/HomeComponent';
 import Services from './ServicesComponent/ServicesComponent';
 import Login from './LoginComponent/LoginComponent';
+import Sign from './SignupComponent/SignupComponent';
 
 const MainComponent = () => {
     return ( <>
@@ -19,6 +20,7 @@ const MainComponent = () => {
                 <Route path='/services' element={<Services />} />
                 <Route path='/appointments' element={<Appointments />} />
                 <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<Sign />} />
             </Routes>
     </Router>
     </> );

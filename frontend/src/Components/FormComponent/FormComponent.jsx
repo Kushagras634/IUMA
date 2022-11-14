@@ -7,13 +7,20 @@ const FormComponent = (props) => {
         if(field.label==='Password') {
             return (<>
                 <label>{field.label}</label>
-                <input type='password' className='field_box' name={field.label} /><br /><br />
+                <input type='password' className='field_box' name={field.label} /><br />
             </>);
+        }
+        else if(field.label==='Gender') {
+            return (<div className='container'>
+                <label>{field.label}</label>
+                <input type='radio' name={field.label} />Male
+                <input type='radio' name={field.label} />Female
+            </div>);
         }
         else {
             return (<>
                 <label>{field.label}</label>
-                <input type='text' className='field_box' name={field.label} /><br /><br />
+                <input type='text' className='field_box' name={field.label} /><br />
             </>);
         }
     });
@@ -23,6 +30,7 @@ const FormComponent = (props) => {
         </div>
         <div className='form_fields'>
             {field_list()}
+            <br />
             <Button name={props.buton} />
         </div>
     </div> );
