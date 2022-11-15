@@ -1,14 +1,17 @@
 .form_button {
-    background-color: var(--buttonColor);
-    color: #fff;
-    font-size: var(--headlineSmall);
-    font-weight: 400;
-    text-align: center;
-    border-radius: 50px;
-    cursor: pointer;
-    padding: 3%;
+  background-color: var(--buttonColor);
+  color: #fff;
+  font-size: var(--headlineSmall);
+  font-weight: 400;
+  text-align: center;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: .75rem 0;
+  width: 100%;
+  border: none;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.493);
 }
 
-.form_button:hover {
-    box-shadow: 5px 5px 10px grey;
+.form_button:active {
+  box-shadow: none;
 }

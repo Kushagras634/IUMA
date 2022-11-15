@@ -25,12 +25,12 @@ const FormComponent = (props) => {
         }
     });
     return ( <div className='container form_box'>
-        <div className='image'>
-            <img src={props.image} height="400" width='500' />
+        <div className='form-image'>
+            <img src={props.img} alt={props.heading} />
         </div>
         <div className='form_fields'>
+            <h1>{props.heading}</h1>
             {field_list()}
-            <br />
             <Button name={props.buton} />
         </div>
     </div> );

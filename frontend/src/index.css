@@ -1,12 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
+html, body, .root{
+  padding: 0px;
+}
+
 * {
   --displayLarge: 64px;
   --displayMedium: 45px;
   --displaySmall: 36px;
-  --headlineLarge: 32px;
-  --headlineMedium: 28px;
-  --headlineSmall: 24px;
+  --headlineLarge: 28px;
+  --headlineMedium: 24px;
+  --headlineSmall: 18px;
   --titleLarge: 22px;
   --titleMedium: 16px;
   --titleSmall: 14px;
@@ -24,4 +28,5 @@
   margin: 0;
   padding: 2px;
 }
+
 

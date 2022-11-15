@@ -1,12 +1,6 @@
-nav>ul {
-    list-style: none;
-}
+
 .container {
     display: flex;
     gap: 2%;
 }
-.nav_tab {
-    text-decoration: none;
-    color: #000;
-    font-size: 1rem;
-}
+

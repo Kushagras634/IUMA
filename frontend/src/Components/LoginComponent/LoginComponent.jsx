@@ -1,20 +1,18 @@
-import React from 'react';
-import Form from '../FormComponent/FormComponent';
-import './login.css';
+import React from "react";
+import Form from "../FormComponent/FormComponent";
+import "./login.css";
+import sideImg from "../../assets/4587.jpg";
 
 const field_list = [
-    { 'label': 'Login email or mobile  number'},
-    { 'label': 'Password'}
+  { label: "Login email or mobile  number" },
+  { label: "Password" },
 ];
 const LoginComponent = () => {
-    return ( <>
-        <div className='heading'>
-            <p>Log in</p>
-        </div>
-        <div style={{'paddingLeft':'2%'}}>
-            <Form fields={field_list} buton='Log in' image='doctor.png' />
-        </div>
-    </> );
-}
+  return (
+    <div className="login-wrapper">
+      <Form fields={field_list} img={sideImg} heading="Log in" buton="Log in" />
+    </div>
+  );
+};
 
 export default LoginComponent;
