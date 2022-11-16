@@ -10,7 +10,7 @@ const field_list = [
 const LoginComponent = () => {
   return (
     <div className="login-wrapper">
-      <Form fields={field_list} img={sideImg} heading="Log in" buton="Log in" />
+      <Form fields={field_list} img={sideImg} redirectTo="/" heading="Log in" buton="Log in" />
     </div>
   );
 };

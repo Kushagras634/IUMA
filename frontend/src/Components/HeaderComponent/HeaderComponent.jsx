@@ -10,7 +10,9 @@ const HeaderComponent = () => {
     <header>
       <div className="header-label container">
         <div>
+          <Link to='/'>
           <img src={logo} alt="" className="logo" />
+          </Link>
         </div>
         <ul className="header-menu-items">
           <li>

@@ -17,8 +17,10 @@
   align-items: center;
   justify-content: center;
 }
+
 .form_fields label{
   padding-left: 1rem;
+  margin-top: .75rem;
 }
 .form-image{
   width: 50%;

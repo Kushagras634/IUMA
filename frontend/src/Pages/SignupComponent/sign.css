@@ -1,0 +1,33 @@
+.heading {
+    font-size: var(--headlineLarge);
+    font-weight: 700;
+    text-align: end;
+    padding-top: 3%;
+    padding-right: 20%;
+}
+
+.org-heading{
+  display: flex;
+  justify-content: center;
+  
+}
+
+.org-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.org-row figure{
+  width: 300px;
+  height: 300px;
+  overflow: hidden;
+  margin: .5rem 2rem;
+  border-radius: 10px;
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.142);
+}
+
+.org-row figure img{
+  width:inherit;
+  height: auto;
+}
