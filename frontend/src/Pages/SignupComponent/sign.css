@@ -18,16 +18,30 @@
   justify-content: center;
 }
 
-.org-row figure{
-  width: 300px;
-  height: 300px;
+.org-row div{
+  width: 250px;
+  height: 250px;
   overflow: hidden;
   margin: .5rem 2rem;
   border-radius: 10px;
   box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.142);
+  border: 1px solid black;
+  cursor: pointer;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-clip: border-box !important;
+  background-size: cover !important;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  
 }
 
-.org-row figure img{
-  width:inherit;
-  height: auto;
+.org-row p{
+  font-size: medium;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.56);
+  border-radius: 5px;
+  padding: .25rem 1rem;
 }
+

@@ -2,14 +2,14 @@ import React from "react";
 import Form from "../../Components/FormComponent/FormComponent";
 import signUpImage from "../../assets/Mobile-login.jpg";
 import { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Redirect, useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import person from '../../assets/person.webp'
-import doctor from '../../assets/doctor.webp'
-import pharmacy from '../../assets/pharmacy.jpg'
-import hospital from '../../assets/hospital.webp'
-import laboratory from '../../assets/laboratory.jpg'
-import './sign.css'
+import person from "../../assets/person.webp";
+import doctor from "../../assets/doctor.webp";
+import pharmacy from "../../assets/pharmacy.jpg";
+import hospital from "../../assets/hospital.webp";
+import laboratory from "../../assets/laboratory.jpg";
+import "./sign.css";
 
 const field_list = [
   { label: "Full name" },
@@ -22,11 +22,20 @@ const field_list = [
 
 const SignupComponent = () => {
   const params = useLocation().search;
-  const [location, setLocation] = useState();
+  const [location, setLocation] = useState("");
+  const [profession, setProfession] = useState("")
 
   useEffect(() => {
     setLocation(new URLSearchParams(params).get("check"));
+    if(location === 'detail'){
+      setProfession(()=>new URLSearchParams(params).get("prof"))
+    }
   }, [params]);
+  // console.log(profession,new URLSearchParams(params).get("prof"))
+
+  const handleProfession = (item) => {
+    window.location.href = `/signup?check=detail&prof=${item}`
+  }
 
   return (
     <>
@@ -44,28 +53,37 @@ const SignupComponent = () => {
               />
             </div>
           ),
-          'org': <div className="org">
-            <h1 className="org-heading">Chose your Profession</h1>
-            <div className="org-row">
-              <figure>
-                <img src={person} alt="" />
-              </figure>
-              <figure>
-                <img src={doctor} alt="" />
-              </figure>
-              <figure>
-                <img src={pharmacy} alt="" />
-              </figure>
+          'org': (
+            <div className="org">
+              <h1 className="org-heading">Chose your Profession</h1>
+              <div className="org-row">
+                <div style={{ background: `url(${person})` }} id="patient" onClick={()=>handleProfession("Patient")}>
+                  <p>Patient</p>
+                </div>
+                <div style={{ background: `url(${doctor})` }} id='doctor' onClick={()=>handleProfession("Doctor")}>
+                  <p>Doctor</p>
+                </div>
+                <div style={{ background: `url(${pharmacy})` }} id='pharmacy' onClick={()=>handleProfession("Pharmacy")}>
+                  <p>Pharmacy</p>
+                </div>
+              </div>
+              <div className="org-row">
+                <div style={{ background: `url(${hospital})` }} id='hospital' onClick={()=>handleProfession("Hospital")}>
+                  <p>Hospital</p>
+                </div>
+                <div style={{ background: `url(${laboratory})` }} id='laboratory'  onClick={()=>handleProfession("Laboratory")}>
+                  <p>Laboratory</p>
+                </div>
+              </div>
             </div>
-            <div className="org-row">
-              <figure>
-                <img src={hospital} alt="" />
-              </figure>
-              <figure>
-                <img src={laboratory} alt="" />
-              </figure>
-            </div>
-          </div>,
+          ),
+          'detail':{
+            'Patient':(<div>Patient</div>),
+            'Doctor':(<div>Doctor</div>),
+            'Pharmacy':(<div>Pharmacy</div>),
+            'Hospital':(<div>Hospital</div>),
+            'Laboratory':(<div>Laoratory</div>)
+          }[profession]
         }[location]
       }
     </>
