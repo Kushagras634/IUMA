@@ -1,0 +1,36 @@
+.dashboard{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.dashboard-side{
+    border-right: 1px solid rgba(201, 201, 201, 0.611);
+    position: fixed;
+}
+
+.dashboard-main{
+    padding: 10px;
+}
+
+.dashboard-profile{
+    display: flex; 
+}
+
+.dashboard-profile > div:first-child{
+    padding-right: 4rem;
+}
+
+.dashboard-profile > figure{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 125px;
+    height: 125px;
+}
+
+.dashboard-profile > figure > img{
+    height: 130px;
+}
