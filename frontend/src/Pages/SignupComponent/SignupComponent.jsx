@@ -2,7 +2,7 @@ import React from "react";
 import Form from "../../Components/FormComponent/FormComponent";
 import signUpImage from "../../assets/Mobile-login.jpg";
 import { useState } from "react";
-import { Redirect, useLocation, useParams } from "react-router-dom";
+import { Redirect, useLocation, useParams, Link } from "react-router-dom";
 import { useEffect } from "react";
 import person from "../../assets/person.webp";
 import doctor from "../../assets/doctor.webp";
@@ -10,23 +10,35 @@ import pharmacy from "../../assets/pharmacy.jpg";
 import hospital from "../../assets/hospital.webp";
 import laboratory from "../../assets/laboratory.jpg";
 import "./sign.css";
+import {
+  Container,
+  Stack,
+  Toolbar,
+  Box,
+  CssBaseline,
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  CardActionArea,
+} from "@mui/material";
 
 const patient_field_list = [
-  { label: 'Full Name', name: 'name', type: 'text' },
-  { label: 'Email', name: 'email', type: 'email' },
-  { label: 'Password', name: 'password', type: 'password' },
-  { label: 'Confirm Password', name: 'cpassword', type: 'password' },
-  { label: 'Mobile', name: 'mobile', type: 'number' },
+  { label: "Full Name", name: "name", type: "text" },
+  { label: "Email", name: "email", type: "email" },
+  { label: "Password", name: "password", type: "password" },
+  { label: "Confirm Password", name: "cpassword", type: "password" },
+  { label: "Mobile", name: "mobile", type: "number" },
   {
-    label: 'Address',
-    type: 'group',
+    label: "Address",
+    type: "group",
     fields: [
-        {label: 'Street', name: 'street', type: 'text'},
-        {label: 'House Number', name: 'houseNumber', type: 'text'},
-        {label: 'City', name: 'city', type: 'text'},
-        {label: 'State', name: 'state', type: 'text'},
-    ]
-},
+      { label: "Street", name: "street", type: "text" },
+      { label: "House Number", name: "houseNumber", type: "text" },
+      { label: "City", name: "city", type: "text" },
+      { label: "State", name: "state", type: "text" },
+    ],
+  },
 ];
 
 const doctor_field_list = [
@@ -74,11 +86,32 @@ const lab_field_list = [
   { label: "Registration Number" },
 ];
 
-
-
 const SignupComponent = () => {
   const params = useLocation().search;
   const [location, setLocation] = useState("");
+
+  const ocupation = [
+    {
+      img: person,
+      title: "Patient",
+    },
+    {
+      img: doctor,
+      title: "Doctor",
+    },
+    {
+      img: pharmacy,
+      title: "Pharmacy",
+    },
+    {
+      img: hospital,
+      title: "Hospital",
+    },
+    {
+      img: laboratory,
+      title: "Laboratory",
+    },
+  ];
 
   useEffect(() => {
     setLocation(new URLSearchParams(params).get("prof"));
@@ -86,38 +119,59 @@ const SignupComponent = () => {
   // console.log(profession,new URLSearchParams(params).get("prof"))
 
   const handleProfession = (item) => {
-    window.location.href = `/signup?prof=${item}`
-  }
+    window.location.href = `/signup?prof=${item}`;
+  };
+
+  const CardComponent = ({ img, title }) => {
+    return (
+      <Card sx={{ maxWidth: "300px", cursor: "pointer", margin: '1rem' }}>
+        <CardActionArea  onClick={() => handleProfession(title)} >
+        <CardMedia
+          image={img}
+          title={title}
+          sx={{ height: "200px", width: "220px" }}
+        />
+        <CardContent sx={{ textAlign: "center" }}>
+          <Typography>{title}</Typography>
+        </CardContent>
+        </CardActionArea>
+      </Card>
+    );
+  };
 
   return (
     <>
       {
         {
           null: (
-            <div className="org">
-              <h1 className="org-heading">Chose your Profession</h1>
-              <div className="org-row">
-                <div style={{ background: `url(${person})` }} id="patient" onClick={() => handleProfession("Patient")}>
-                  <p>Patient</p>
-                </div>
-                <div style={{ background: `url(${doctor})` }} id='doctor' onClick={() => handleProfession("Doctor")}>
-                  <p>Doctor</p>
-                </div>
-                <div style={{ background: `url(${pharmacy})` }} id='pharmacy' onClick={() => handleProfession("Pharmacy")}>
-                  <p>Pharmacy</p>
-                </div>
-              </div>
-              <div className="org-row">
-                <div style={{ background: `url(${hospital})` }} id='hospital' onClick={() => handleProfession("Hospital")}>
-                  <p>Hospital</p>
-                </div>
-                <div style={{ background: `url(${laboratory})` }} id='laboratory' onClick={() => handleProfession("Laboratory")}>
-                  <p>Laboratory</p>
-                </div>
-              </div>
-            </div>
+            <>
+              <Stack
+                direction="column"
+                sx={{
+                  minHeight: "85vh",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Stack
+                  direction="row"
+                  sx={{
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexWrap: "wrap",
+                    maxWidth: "60vw",
+                  }}
+                >
+                  {
+                    ocupation.map((ele, idx)=>{
+                      return <CardComponent key={idx} title={ele.title} img={ele.img} />
+                    })
+                  }
+                </Stack>
+              </Stack>
+            </>
           ),
-          'Patient': (
+          Patient: (
             <div style={{ paddingLeft: "2%" }}>
               <Form
                 fields={patient_field_list}
@@ -129,7 +183,7 @@ const SignupComponent = () => {
               />
             </div>
           ),
-          'Doctor': (
+          Doctor: (
             <div style={{ paddingLeft: "2%" }}>
               <Form
                 fields={doctor_field_list}
@@ -141,7 +195,7 @@ const SignupComponent = () => {
               />
             </div>
           ),
-          'Pharmacy': (
+          Pharmacy: (
             <div style={{ paddingLeft: "2%" }}>
               <Form
                 fields={pharmacy_field_list}
@@ -153,7 +207,7 @@ const SignupComponent = () => {
               />
             </div>
           ),
-          'Hospital': (
+          Hospital: (
             <div style={{ paddingLeft: "2%" }}>
               <Form
                 fields={hospital_field_list}
@@ -165,7 +219,7 @@ const SignupComponent = () => {
               />
             </div>
           ),
-          'Laboratory': (
+          Laboratory: (
             <div style={{ paddingLeft: "2%" }}>
               <Form
                 fields={lab_field_list}
@@ -177,7 +231,6 @@ const SignupComponent = () => {
               />
             </div>
           ),
-
         }[location]
       }
     </>

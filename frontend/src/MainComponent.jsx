@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Components/HeaderComponent/HeaderComponent';
+import Header from './Components/HeaderComponent'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Appointments from './Components/AppointmentsComponent/AppointmentsComponent';
 import Blogs from './Components/BlogsComponent/BlogsComponent';

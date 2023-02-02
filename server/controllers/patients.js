@@ -18,33 +18,43 @@ exports.signup = (req, res) => {
     console.log(req.body)
 
     Patient.findOne({ email: req.body.email }, (err, existingPatient) => {
+        // console.log("Error : ", err)
+        // console.log("Existing Patient : " , existingPatient )    
         if (existingPatient) {
-            return res.status(409).json({
-                message: "Email alredy exists"
+            console.log("Email Already Exists")
+            // return res.status(400).send({
+            //     message: "Email alredy exists",
+            //     error: err
+            // })
+            return res.status(401).send('Email already Exists');
+        }
+        else {
+            bcrypt.hash(patient.password, 10, function (err, hash) {
+                if (err) {
+                    // return res.status(500).json({
+                    //     message: "Error hashing password",
+                    //     error: err
+                    // })
+                }
+                else {
+                    patient.password = hash
+                    patient.save((err, result) => {
+                        if (err) {
+                            // return res.status(500).json({
+                            //     message: "Error saving patient",
+                            //     error: err
+                            // })
+                        }
+                        // return res.status(201).json({
+                        //     message: 'Patient created',
+                        // })
+                    })
+                }
+
             })
         }
     })
 
-    bcrypt.hash(patient.password, 10, function (err, hash) {
-        if (err) {
-            console.log(err)
-            return res.status(500).json({
-                message: "Error hashing password",
-                error: err
-            })
-        }
-        patient.password = hash
-    })
-    patient.save((err, result) => {
-        console.log(err)
-        if (err) {
-            return res.status(500).json({
-                message: "Error saving patient",
-                error: err
-            })
-        }
-        res.status(201).json({
-            message: 'Patient created',
-        })
-    })
+
+
 }
