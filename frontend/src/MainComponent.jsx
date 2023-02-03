@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Appointments from "./Components/AppointmentsComponent/AppointmentsComponent";
 import Blogs from "./Components/BlogsComponent/BlogsComponent";
 import Doctors from "./Components/DoctorsComponent/DoctorsComponent";
-import Home from "./Components/HomeComponent/HomeComponent";
+import Home from "./Pages/HomeComponent";
 import Services from "./Components/ServicesComponent/ServicesComponent";
 import Login from "./Components/LoginComponent/LoginComponent";
 import Sign from "./Pages/SignupComponent";
-import Dashboard from "./Pages/Dashboard/Dashboard";
+import Dashboard from "./Pages/Dashboard";
 
 const MainComponent = () => {
   return (

@@ -13,15 +13,9 @@ import laboratory from "../assets/laboratory.jpg";
 import {
   Container,
   Stack,
-  Toolbar,
-  Box,
-  CssBaseline,
-  Card,
-  CardMedia,
-  CardContent,
-  Typography,
-  CardActionArea,
 } from "@mui/material";
+
+import CardComponent from "../Components/CardComponent";
 
 const patient_field_list = [
   { label: "Full Name", name: "name", type: "text" },
@@ -125,26 +119,9 @@ const SignupComponent = () => {
   }, [params]);
   // console.log(profession,new URLSearchParams(params).get("prof"))
 
-  const handleProfession = (item) => {
-    window.location.href = `/signup?prof=${item}`;
-  };
+  
 
-  const CardComponent = ({ img, title }) => {
-    return (
-      <Card sx={{ maxWidth: "300px", cursor: "pointer", margin: "1rem" }}>
-        <CardActionArea onClick={() => handleProfession(title)}>
-          <CardMedia
-            image={img}
-            title={title}
-            sx={{ height: "200px", width: "220px" }}
-          />
-          <CardContent sx={{ textAlign: "center" }}>
-            <Typography>{title}</Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    );
-  };
+  
 
   return (
     <>
@@ -175,6 +152,10 @@ const SignupComponent = () => {
                         key={idx}
                         title={ele.title}
                         img={ele.img}
+                        cardWidth="300px"
+                        imgWidth = "200px"
+                        imgHeight = "200px"
+                        link = {`/signup?prof=${ele.title}`}
                       />
                     );
                   })}
