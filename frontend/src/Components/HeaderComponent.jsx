@@ -35,7 +35,7 @@ const HeaderComponent = () => {
   const MenuItemList = (items) => {
     return items.map((item, idx) => {
       return (
-        <Button key={idx} variant="text" sx={{ color: "black" }}>
+        <Button key={idx} variant="text" sx={{ color: "black", margin: '0 .5rem' }}>
           {item}
         </Button>
       );

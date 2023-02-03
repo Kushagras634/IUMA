@@ -1,180 +1,145 @@
-import React, { useState } from 'react';
-import './form.css';
-import axios from 'axios'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
+import React, { useState } from "react";
+import "./form.css";
+import axios from "axios";
+// import TextField from "@mui/material/TextField";
+import { TextField, FormControl, FormHelperText, Grid, Typography, Button } from '@mui/material';
+import { createMuiTheme, ThemeProvider, makeStyles } from "@mui/material/styles";
 
 
 
-const FormComponent = (props) => {
+const FormComponent = ({ fields }) => {
+  // const classes = useStyles();
+  const [formData, setFormData] = useState({});
+  const [errors, setErrors] = useState({});
 
-    const [formData, setFormData] = useState({});
-    const [errors, setErrors] = useState({});
-
-    const validateForm = () => {
-        let tempErrors = {};
-        props.fields.forEach(field => {
-            if (field.required && !formData[field.name]) {
-                tempErrors[field.name] = `${field.label} is required`;
-            }
+  const validate = () => {
+    let tempErrors = {};
+    fields.forEach((field) => {
+      if (field.type === "group") {
+        field.fields.forEach((subField) => {
+          if (!formData[subField.name]) {
+            tempErrors[subField.name] = "This field is required";
+          }
         });
-        setErrors(tempErrors);
-        return Object.keys(tempErrors).length === 0;
-    }
-
-    const handleChange = (event) => {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value
-        });
-        setErrors({
-            ...errors,
-            [event.target.name]: ""
-        });
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (!validateForm()) {
-            return;
+      } else {
+        if (!formData[field.name]) {
+          tempErrors[field.name] = "This field is required";
         }
-        // console.log(formData)
-        // fetch('http://localhost:3001/patient/signup', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         Accept: 'application/json',
-        //     },
-        //     body: JSON.stringify(formData)
-        // }).then(response => response.json())
-        //     .then(data => {
-        //         console.log('Success:', data);
-        //     })
-        //     .catch((error) => {
-        //         console.error('Error:', error);
-        //     });
+      }
+    });
+    setErrors(tempErrors);
+    return Object.keys(tempErrors).length === 0;
+  };
 
-        axios.post("http://localhost:8000/patient/signup", formData, {
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-            .then((res) => {
-                console.log("Success : ", res);
-            })
-            .catch((err) => {
-                console.log("Error: ", err);
-            });
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleRadioChange = (event) => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleAddressChange = (event, field) => {
+    setFormData({
+      ...formData,
+      address: { ...formData.address, [field]: event.target.value },
+    });
+    setErrors({ ...errors, [field]: "" });
+  };
+
+  const addAddress = () => {
+    setFormData({
+      ...formData,
+      address: [...formData.address, { street: "", houseNo: "" }],
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!validate()) {
+      return;
     }
+    console.log(formData)
 
+    axios
+      .post("http://localhost:8000/patient/signup", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => {
+        console.log("Success : ", res);
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  };
 
-    return (
-        <>
+  const renderFields = () => {
+    return fields.map((field, index) => {
+      if (field.type === "group") {
+        return (
+          <React.Fragment key={index}>
+            <Typography variant="h6">{field.label}</Typography>
+            <Grid container spacing={2}>
+              {field.fields.map((subField, subIndex) => {
+                return (
+                  <Grid item xs={6} key={subIndex}>
+                    <FormControl error={errors[subField.name]}>
+                      <TextField
+                        id={subField.name}
+                        label={subField.label}
+                        name={subField.name}
+                        type={subField.type}
+                        fullWidth
+                        required
+                        onChange={handleChange}
+                      />
+                      {errors[subField.name] && (
+                        <FormHelperText>{errors[subField.name]}</FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          </React.Fragment>
+        );
+      } else  {
+        return (
+          <FormControl error={errors[field.name]} key={index}>
+            <TextField
+              id={field.name}
+              label={field.label}
+              name={field.name}
+              type={field.type}
+              fullWidth
+              required
+              onChange={handleChange}
+            />
+            {errors[field.name] && (
+              <FormHelperText>{errors[field.name]}</FormHelperText>
+            )}
+          </FormControl>
+        );
+      }
+    });
+  };
 
-            <form onSubmit={handleSubmit}>
-                {props.fields.map((field, index) => (
-                    <div key={index}>
-                        {field.type !== 'group' && (
-                            <>
-
-                                {(field.type === 'text' || field.type === 'number') && (
-                                    <>
-                                        <TextField
-                                            id="standard-basic"
-                                            label={field.label}
-                                            value={formData[field.name] || ''}
-                                            onChange={handleChange}
-
-                                        />
-                                        <span style={{ color: 'red' }}>{errors[field.name]}</span>
-                                    </>
-                                )}
-                                {field.type === 'email' && (
-                                    <>
-                                        <TextField
-                                            id="standard-basic"
-                                            label={field.name}
-                                            value={formData[field.name] || ''}
-                                            onChange={handleChange}
-                                        />
-                                        <span style={{ color: 'red' }}>{errors[field.name]}</span>
-                                    </>
-                                )}
-                                {field.type === 'password' && (
-                                    <>
-                                        <TextField
-                                            id="standard-basic"
-                                            label={field.name}
-                                            value={formData[field.name] || ''}
-                                            onChange={handleChange}
-                                        />
-                                        <span style={{ color: 'red' }}>{errors[field.name]}</span>
-                                    </>
-                                )}
-                                {field.type === 'radio' && (
-                                    <div>
-                                        {field.options.map((option, idx) => (
-                                            <label key={idx}>
-                                                <input
-                                                    type="radio"
-                                                    name={field.name}
-                                                    value={option.value}
-                                                    checked={formData[field.name] === option.value}
-                                                    onChange={handleChange}
-                                                />
-                                                {option.label}
-                                            </label>
-                                        ))}
-                                    </div>
-                                )}
-                                {field.type === 'select' && (
-                                    <select
-                                        name={field.name}
-                                        value={formData[field.name] || ''}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">Select</option>
-                                        {field.options.map((option, idx) => (
-                                            <option key={idx} value={option.value}>{option.label}</option>
-                                        ))}
-                                    </select>
-                                )}
-                            </>
-                        )}
-
-                        {field.type === 'group' && (
-                            <div>
-                                <label>{field.label}</label>
-                                <div style={{ display: "flex" }}>
-                                    <div style={{ flex: 1, marginRight: "10px" }}>
-                                        {field.fields.map((subField, idx) => (
-                                            <div key={idx}>
-                                                
-                                                <TextField
-                                                  id="standard-basic"
-                                                  label={subField.label}
-                                                  value={formData[subField.name] || ''}
-                                                  onChange={handleChange}
-                                                  
-                                                />
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-    
-
-                    </div>
-                    
-                ))}
-                <Button variant="contained">
-                  {props.buton}
-                </Button>
-            </form>
-        </>
-
-    );
-}
+  return (
+    // <ThemeProvider >
+      <form onSubmit={handleSubmit}>
+        { renderFields()}
+        <input type="submit" value="Submit" />
+      </form>
+    // </ThemeProvider>
+  );
+};
 
 export default FormComponent;

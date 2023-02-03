@@ -1,15 +1,15 @@
 import React from "react";
-import Form from "../../Components/FormComponent/FormComponent";
-import signUpImage from "../../assets/Mobile-login.jpg";
+import Form from "../Components/FormComponent/FormComponent";
+import signUpImage from "../assets/Mobile-login.jpg";
 import { useState } from "react";
-import { Redirect, useLocation, useParams, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import person from "../../assets/person.webp";
-import doctor from "../../assets/doctor.webp";
-import pharmacy from "../../assets/pharmacy.jpg";
-import hospital from "../../assets/hospital.webp";
-import laboratory from "../../assets/laboratory.jpg";
-import "./sign.css";
+import person from "../assets/person.webp";
+import doctor from "../assets/doctor.webp";
+import pharmacy from "../assets/pharmacy.jpg";
+import hospital from "../assets/hospital.webp";
+import laboratory from "../assets/laboratory.jpg";
+
 import {
   Container,
   Stack,
@@ -42,18 +42,25 @@ const patient_field_list = [
 ];
 
 const doctor_field_list = [
-  { label: "Full name" },
-  { label: "Email" },
-  { label: "Password" },
-  { label: "Confirm Password" },
-  { label: "Mobile Mumber" },
-  { label: "Gender" },
-  { label: "Address" },
-  { label: "Registration Number" },
-  { label: "Year of Rgistration" },
-  { label: "State Medical Council" },
-  { label: "Degree" },
-  { label: "College" },
+  { label: "Full Name", name: "name", type: "text" },
+  { label: "Email", name: "email", type: "email" },
+  { label: "Password", name: "password", type: "password" },
+  { label: "Confirm Password", name: "cpassword", type: "password" },
+  { label: "Mobile", name: "mobile", type: "number" },
+  { label: "date of Birth", name: "dob", type: "date" },
+  {
+    label: "Address",
+    type: "group",
+    fields: [
+      { label: "Street", name: "street", type: "text" },
+      { label: "House Number", name: "houseNumber", type: "text" },
+      { label: "City", name: "city", type: "text" },
+      { label: "State", name: "state", type: "text" },
+    ],
+  },
+  { label: "College", name: "college", type: "text" },
+  { label: "Year of Passing", name: "yop", type: "date" },
+  { label: "Registration Number", name: "registration", type: "text" },
 ];
 
 const hospital_field_list = [
@@ -124,16 +131,16 @@ const SignupComponent = () => {
 
   const CardComponent = ({ img, title }) => {
     return (
-      <Card sx={{ maxWidth: "300px", cursor: "pointer", margin: '1rem' }}>
-        <CardActionArea  onClick={() => handleProfession(title)} >
-        <CardMedia
-          image={img}
-          title={title}
-          sx={{ height: "200px", width: "220px" }}
-        />
-        <CardContent sx={{ textAlign: "center" }}>
-          <Typography>{title}</Typography>
-        </CardContent>
+      <Card sx={{ maxWidth: "300px", cursor: "pointer", margin: "1rem" }}>
+        <CardActionArea onClick={() => handleProfession(title)}>
+          <CardMedia
+            image={img}
+            title={title}
+            sx={{ height: "200px", width: "220px" }}
+          />
+          <CardContent sx={{ textAlign: "center" }}>
+            <Typography>{title}</Typography>
+          </CardContent>
         </CardActionArea>
       </Card>
     );
@@ -162,17 +169,21 @@ const SignupComponent = () => {
                     maxWidth: "60vw",
                   }}
                 >
-                  {
-                    ocupation.map((ele, idx)=>{
-                      return <CardComponent key={idx} title={ele.title} img={ele.img} />
-                    })
-                  }
+                  {ocupation.map((ele, idx) => {
+                    return (
+                      <CardComponent
+                        key={idx}
+                        title={ele.title}
+                        img={ele.img}
+                      />
+                    );
+                  })}
                 </Stack>
               </Stack>
             </>
           ),
           Patient: (
-            <div style={{ paddingLeft: "2%" }}>
+            <Container>
               <Form
                 fields={patient_field_list}
                 img={signUpImage}
@@ -181,10 +192,10 @@ const SignupComponent = () => {
                 image="doctor.png"
                 redirectTo="/"
               />
-            </div>
+            </Container>
           ),
           Doctor: (
-            <div style={{ paddingLeft: "2%" }}>
+            <Container maxWidth="xs">
               <Form
                 fields={doctor_field_list}
                 img={signUpImage}
@@ -193,10 +204,10 @@ const SignupComponent = () => {
                 image="doctor.png"
                 redirectTo="/"
               />
-            </div>
+            </Container>
           ),
           Pharmacy: (
-            <div style={{ paddingLeft: "2%" }}>
+            <Container maxWidth="xs">
               <Form
                 fields={pharmacy_field_list}
                 img={signUpImage}
@@ -205,10 +216,10 @@ const SignupComponent = () => {
                 image="doctor.png"
                 redirectTo="/"
               />
-            </div>
+            </Container>
           ),
           Hospital: (
-            <div style={{ paddingLeft: "2%" }}>
+            <Container maxWidth="xs">
               <Form
                 fields={hospital_field_list}
                 img={signUpImage}
@@ -217,10 +228,10 @@ const SignupComponent = () => {
                 image="doctor.png"
                 redirectTo="/"
               />
-            </div>
+            </Container>
           ),
           Laboratory: (
-            <div style={{ paddingLeft: "2%" }}>
+            <Container maxWidth="xs">
               <Form
                 fields={lab_field_list}
                 img={signUpImage}
@@ -229,7 +240,7 @@ const SignupComponent = () => {
                 image="doctor.png"
                 redirectTo="/"
               />
-            </div>
+            </Container>
           ),
         }[location]
       }
