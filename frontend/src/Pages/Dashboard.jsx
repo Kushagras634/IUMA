@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import CustomTable from "../Components/TableComponent";
 import profile from "../assets/profile.jpg";
-import { Card, Stack, Toolbar, Typography, Container } from "@mui/material";
+import {
+  Card,
+  Stack,
+  Toolbar,
+  Typography,
+  Container,
+  Box,
+} from "@mui/material";
 import CardComponent from "../Components/CardComponent";
 import Prescription from "../Components/PrescriptionComponent";
 import PatientForm from "../Components/PatientDetails";
 
 const Dashboard = () => {
-  const [sidepanelMargin, setSidepanelMargin] = useState("250px");
-
   const medical_data = {
     column: ["Name", "Prescription", "Report", "Bill_Amount"],
     rows: [
@@ -54,21 +59,40 @@ const Dashboard = () => {
     },
   ];
 
+  const patientOptions = [
+    {
+      title: "Doctors Appointment",
+      rediredt: "",
+    },
+    {
+      title: "Get your Test's done  ",
+      rediredt: "",
+    },
+    {
+      title: "Buy your Medicines",
+      rediredt: "",
+    },
+    {
+      title: "Book ",
+      rediredt: "",
+    },
+  ];
+
   return (
-    <Stack sx={{ margin: "0 2rem" }} direction="column">
-      <Stack direction="row" marginTop='2rem'>
-        <Container maxWidth="md">
+    <Box sx={{ margin: "0 2rem" }}>
+      <Stack direction="row" marginTop="2rem">
+        <Box maxWidth="md">
           <Prescription
             patientDetails={patientDetails}
             doctorDetails={doctorDetails}
             medicines={medicines}
           />
-        </Container>
-        <Container maxWidth="md">
+        </Box>
+        <Box maxWidth="md">
           <PatientForm />
-        </Container>
+        </Box>
       </Stack>
-      <Stack direction="row">
+      <Stack direction="row" margin="10rem 0">
         {Array(8)
           .fill(0)
           .map((ele, idx) => {
@@ -98,7 +122,7 @@ const Dashboard = () => {
           title="Bill Amount"
         />
       </Stack>
-    </Stack>
+    </Box>
   );
 };
 

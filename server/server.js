@@ -13,7 +13,7 @@ const corsOptions ={
 
 app.use(cors(corsOptions));
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000/"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5173"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
@@ -25,6 +25,7 @@ const conn = require('./db/conn');
 const bodyParser = require('body-parser');
 
 const patientRoutes = require('./routes/paitents')
+const loginRoute= require('./routes/login')
 
 
 conn.on('error', (error) => {
@@ -41,6 +42,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // your routes goes here
 app.use('/patient', patientRoutes);
+app.use('/login', loginRoute)
+
+app.use(express.static('build'));
 
 
 app.listen(8000, () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../Components/FormComponent/FormComponent";
+import Form from "../Components/FormComponent";
 import signUpImage from "../assets/Mobile-login.jpg";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -10,10 +10,7 @@ import pharmacy from "../assets/pharmacy.jpg";
 import hospital from "../assets/hospital.webp";
 import laboratory from "../assets/laboratory.jpg";
 
-import {
-  Container,
-  Stack,
-} from "@mui/material";
+import {  Stack, Typography, Box } from "@mui/material";
 
 import CardComponent from "../Components/CardComponent";
 
@@ -23,16 +20,10 @@ const patient_field_list = [
   { label: "Password", name: "password", type: "password" },
   { label: "Confirm Password", name: "cpassword", type: "password" },
   { label: "Mobile", name: "mobile", type: "number" },
-  {
-    label: "Address",
-    type: "group",
-    fields: [
-      { label: "Street", name: "street", type: "text" },
-      { label: "House Number", name: "houseNumber", type: "text" },
-      { label: "City", name: "city", type: "text" },
-      { label: "State", name: "state", type: "text" },
-    ],
-  },
+  { label: "Street", name: "street", type: "text" },
+  { label: "House Number", name: "houseNumber", type: "text" },
+  { label: "City", name: "city", type: "text" },
+  { label: "State", name: "state", type: "text" },
 ];
 
 const doctor_field_list = [
@@ -42,49 +33,44 @@ const doctor_field_list = [
   { label: "Confirm Password", name: "cpassword", type: "password" },
   { label: "Mobile", name: "mobile", type: "number" },
   { label: "date of Birth", name: "dob", type: "date" },
-  {
-    label: "Address",
-    type: "group",
-    fields: [
-      { label: "Street", name: "street", type: "text" },
-      { label: "House Number", name: "houseNumber", type: "text" },
-      { label: "City", name: "city", type: "text" },
-      { label: "State", name: "state", type: "text" },
-    ],
-  },
+
+  { label: "Street", name: "street", type: "text" },
+  { label: "House Number", name: "houseNumber", type: "text" },
+  { label: "City", name: "city", type: "text" },
+  { label: "State", name: "state", type: "text" },
   { label: "College", name: "college", type: "text" },
   { label: "Year of Passing", name: "yop", type: "date" },
   { label: "Registration Number", name: "registration", type: "text" },
 ];
 
 const hospital_field_list = [
-  { label: "Namw" },
-  { label: "Email" },
-  { label: "Password" },
-  { label: "Confirm Password" },
-  { label: "Mobile Mumber" },
-  { label: "Address" },
-  { label: "Registration Id" },
+  { label: "Name", name: 'name', type: 'text' },
+  { label: "Email", name:'email', type: 'email' },
+  { label: "Password", name: 'password', type:'password' },
+  { label: "Confirm Password", name: 'cpassword', type:'password' },
+  { label: "Mobile Mumber", name: 'mobile', type:'text' },
+  { label: "Address" , name: 'adddress', type: 'text'},
+  { label: "Registration Id", name:'regId', type:'text' },
 ];
 
 const pharmacy_field_list = [
-  { label: "Name" },
-  { label: "Email" },
-  { label: "Password" },
-  { label: "Confirm Password" },
-  { label: "Mobile Mumber" },
-  { label: "Address" },
-  { label: "Registration Number" },
+  { label: "Name", name: 'name', type: 'text' },
+  { label: "Email", name:'email', type: 'email' },
+  { label: "Password", name: 'password', type:'password' },
+  { label: "Confirm Password", name: 'cpassword', type:'password' },
+  { label: "Mobile Mumber", name: 'mobile', type:'text' },
+  { label: "Address" , name: 'adddress', type: 'text'},
+  { label: "Registration Id", name:'regId', type:'text' },
 ];
 
 const lab_field_list = [
-  { label: "Full name" },
-  { label: "Email" },
-  { label: "Password" },
-  { label: "Confirm Password" },
-  { label: "Mobile Mumber" },
-  { label: "Address" },
-  { label: "Registration Number" },
+  { label: "Name", name: 'name', type: 'text' },
+  { label: "Email", name:'email', type: 'email' },
+  { label: "Password", name: 'password', type:'password' },
+  { label: "Confirm Password", name: 'cpassword', type:'password' },
+  { label: "Mobile Mumber", name: 'mobile', type:'text' },
+  { label: "Address" , name: 'adddress', type: 'text'},
+  { label: "Registration Id", name:'regId', type:'text' },
 ];
 
 const SignupComponent = () => {
@@ -119,10 +105,6 @@ const SignupComponent = () => {
   }, [params]);
   // console.log(profession,new URLSearchParams(params).get("prof"))
 
-  
-
-  
-
   return (
     <>
       {
@@ -153,9 +135,10 @@ const SignupComponent = () => {
                         title={ele.title}
                         img={ele.img}
                         cardWidth="300px"
-                        imgWidth = "200px"
-                        imgHeight = "200px"
-                        link = {`/signup?prof=${ele.title}`}
+                        imgWidth="200px"
+                        imgHeight="200px"
+                        link={`/signup?prof=${ele.title}`}
+                        margin="1rem"
                       />
                     );
                   })}
@@ -164,7 +147,22 @@ const SignupComponent = () => {
             </>
           ),
           Patient: (
-            <Container>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: "70vh",
+              }}
+            >
+              <Typography
+                variant="h4"
+                color="initial"
+                sx={{ marginBottom: "3rem" }}
+              >
+                Sign Up{" "}
+              </Typography>
               <Form
                 fields={patient_field_list}
                 img={signUpImage}
@@ -173,10 +171,25 @@ const SignupComponent = () => {
                 image="doctor.png"
                 redirectTo="/"
               />
-            </Container>
+            </Box>
           ),
           Doctor: (
-            <Container maxWidth="xs">
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: "70vh",
+              }}
+            >
+              <Typography
+                variant="h4"
+                color="initial"
+                sx={{ marginBottom: "3rem" }}
+              >
+                Sign Up{" "}
+              </Typography>
               <Form
                 fields={doctor_field_list}
                 img={signUpImage}
@@ -185,10 +198,25 @@ const SignupComponent = () => {
                 image="doctor.png"
                 redirectTo="/"
               />
-            </Container>
+            </Box>
           ),
           Pharmacy: (
-            <Container maxWidth="xs">
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: "70vh",
+              }}
+            >
+              <Typography
+                variant="h4"
+                color="initial"
+                sx={{ marginBottom: "3rem" }}
+              >
+                Sign Up{" "}
+              </Typography>
               <Form
                 fields={pharmacy_field_list}
                 img={signUpImage}
@@ -197,10 +225,25 @@ const SignupComponent = () => {
                 image="doctor.png"
                 redirectTo="/"
               />
-            </Container>
+            </Box>
           ),
           Hospital: (
-            <Container maxWidth="xs">
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: "70vh",
+              }}
+            >
+              <Typography
+                variant="h4"
+                color="initial"
+                sx={{ marginBottom: "3rem" }}
+              >
+                Sign Up{" "}
+              </Typography>
               <Form
                 fields={hospital_field_list}
                 img={signUpImage}
@@ -209,10 +252,25 @@ const SignupComponent = () => {
                 image="doctor.png"
                 redirectTo="/"
               />
-            </Container>
+            </Box>
           ),
           Laboratory: (
-            <Container maxWidth="xs">
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: "70vh",
+              }}
+            >
+              <Typography
+                variant="h4"
+                color="initial"
+                sx={{ marginBottom: "3rem" }}
+              >
+                Sign Up{" "}
+              </Typography>
               <Form
                 fields={lab_field_list}
                 img={signUpImage}
@@ -221,7 +279,7 @@ const SignupComponent = () => {
                 image="doctor.png"
                 redirectTo="/"
               />
-            </Container>
+            </Box>
           ),
         }[location]
       }

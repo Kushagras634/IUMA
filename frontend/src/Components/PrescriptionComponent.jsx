@@ -6,7 +6,7 @@ import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow
 const Prescription = ({ patientDetails, doctorDetails, medicines, total }) => {
 
   return (
-    <Paper sx={{width: '100%', padding: '1rem   '}}>
+    <Paper sx={{ padding: '1rem', height: '100%'}}>
       <h2>Patient Details</h2>
       <p>
         Name: {patientDetails.name} <br />

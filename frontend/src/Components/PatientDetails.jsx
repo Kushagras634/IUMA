@@ -4,7 +4,7 @@ import { Grid, Typography, Avatar, Paper } from '@mui/material';
 
 const PatientForm = () => {
   return (
-    <Paper sx={{padding: '3rem'}}>
+    <Paper sx={{padding: '3rem', height: '100%'}}>
       <Avatar sx={{width: 150, height: 150, margin:"0 auto"}} />
       <Typography variant="h5" sx={{textAlign: 'center', marginTop: 2}}>
         John Doe

@@ -6,7 +6,7 @@ import Blogs from "./Components/BlogsComponent/BlogsComponent";
 import Doctors from "./Components/DoctorsComponent/DoctorsComponent";
 import Home from "./Pages/HomeComponent";
 import Services from "./Components/ServicesComponent/ServicesComponent";
-import Login from "./Components/LoginComponent/LoginComponent";
+import Login from "./Pages/LoginComponent";
 import Sign from "./Pages/SignupComponent";
 import Dashboard from "./Pages/Dashboard";
 
