@@ -1,6 +1,11 @@
 import React from "react";
 import SvgComponent from "../Components/mainSVGComponent";
 import CardComponent from "../Components/CardComponent";
+import Button from "@mui/material/Button";
+import { Box, Typography, createTheme } from "@mui/material";
+import { ThemeProvider } from "@emotion/react";
+import { Link } from "react-router-dom";
+
 const cards = [
   {
     heading: "Instant Video Consultation",
@@ -40,34 +45,80 @@ const HomeComponent = () => {
           imgWidth="200px"
           imgHeight="200px"
           margin=".1rem"
-          link="" 
+          link=""
         />
       );
     });
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#2EC5BC",
+        light: "#2EC5BC",
+        dark: "#2EC5BC",
+      },
+    },
+  });
   return (
-    <main>
-      <div className="container main-slider">
-        <div className="main-heading">
-          <p className="main-display">
-            Deliver accurate and timely health care.
-          </p>
-          <p className="main-title">
-            A trustworthy healthcare campanion. We really care about your health
-            and consiousness.{" "}
-          </p>
-          <div className="container main-buttons">
-            <button>Book Appointment</button>
-            <button>View Doctors </button>
+    <ThemeProvider theme={theme}>
+      <main>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            padding: "1rem",
+            alignItems: "center",
+          }}
+        >
+          <Box
+            sx={{ display: "flex", flexDirection: "column", padding: "1rem" }}
+          >
+            <Typography
+              color="initial"
+              sx={{ fontSize: "5.3rem", lineHeight: 1 }}
+            >
+              Deliver accurate and timely health care.
+            </Typography>
+            <Typography variant="h5" color="initial">
+              A trustworthy healthcare campanion. We really care about your
+              health and consiousness.{" "}
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                padding: "2rem 1rem",
+                justifyContent: "center",
+              }}
+            >
+              <Button
+                variant="contained"
+                component={Link}
+                to='/'
+                sx={{ margin: "1rem", padding: "1rem 2rem ", color: "white", fontSize: '1rem' }}
+              >
+                Book Appointment
+              </Button>
+              <Button
+                variant="outlined"
+                color="primary"
+                component={Link}
+                to='/'
+                sx={{ margin: "1rem", padding: "1rem 2rem ",border: "2px solid", fontSize: '1rem' }}
+              >
+                Search Doctors
+              </Button>
+            </Box>
+          </Box>
+          <div className="main-svg">
+            <SvgComponent />
           </div>
+        </Box>
+        <div className="container" style={{ padding: "2%" }}>
+          {list_card()}
         </div>
-        <div className="main-svg">
-          <SvgComponent />
-        </div>
-      </div>
-      <div className="container" style={{ padding: "2%" }}>
-        {list_card()}
-      </div>
-    </main>
+      </main>
+    </ThemeProvider>
   );
 };
 
