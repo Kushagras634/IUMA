@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useState } from "react";
@@ -8,10 +8,13 @@ import Button from "@mui/material/Button";
 import { Avatar, createTheme, Menu, MenuItem, Stack, Box } from "@mui/material";
 import profileImg from "../assets/profile.jpg";
 import { ThemeProvider } from "@emotion/react";
-import { Image } from "@mui/icons-material";
+
+import { useDispatch, useSelector } from "react-redux";
+import { logout, login } from "../redux/actions/authAction";
 
 const HeaderComponent = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  let isLogin = useSelector((state) => state.isLoggedIn);
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -32,10 +35,20 @@ const HeaderComponent = () => {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    dispatch(logout);
+    dispatch(login({ token: null, isLoggedIn: false }));
+  };
+
   const MenuItemList = (items) => {
     return items.map((item, idx) => {
       return (
-        <Button key={idx} variant="text" sx={{ color: "black", margin: '0 .5rem' }}>
+        <Button
+          key={idx}
+          variant="text"
+          sx={{ color: "black", margin: "0 .5rem" }}
+        >
           {item}
         </Button>
       );
@@ -66,8 +79,10 @@ const HeaderComponent = () => {
             "aria-labelledby": "avatar-button",
           }}
         >
-          <MenuItem onClick={handleAvatarClose}> Profile</MenuItem>
-          <MenuItem onClick={handleAvatarClose}> Logout</MenuItem>
+          <Link to="/profile">
+            <MenuItem onClick={handleAvatarClose}> Profile</MenuItem>
+          </Link>
+          <MenuItem onClick={handleLogout}> Logout</MenuItem>
         </Menu>
       </>
     );
@@ -107,9 +122,9 @@ const HeaderComponent = () => {
       sx={{ mr: 0, backgroundColor: "transparent", px: 5, py: 0.5 }}
     >
       <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
-          <Link to="/">
-            <Box component='img' src={logo} alt="Logo" sx={{width:'50px'}} />
-          </Link>
+        <Link to="/">
+          <Box component="img" src={logo} alt="Logo" sx={{ width: "50px" }} />
+        </Link>
         <Toolbar sx={{ color: "black" }}>
           {MenuItemList([
             "Home",

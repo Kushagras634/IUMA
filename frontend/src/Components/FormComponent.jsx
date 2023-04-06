@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 // import TextField from "@mui/material/TextField";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from 'react-redux'
+import { login } from "../redux/actions/authAction";
 
 import {
   TextField,
@@ -16,7 +17,7 @@ import {
 
 import { useLocation, useNavigate } from "react-router-dom";
 
-function showToast( message, color, textColor, duration) {
+function showToast(message, color, textColor, duration) {
   toast(message, {
     position: toast.POSITION.TOP_RIGHT,
     autoClose: duration,
@@ -26,7 +27,7 @@ function showToast( message, color, textColor, duration) {
     draggable: true,
     style: {
       backgroundColor: color,
-      color:textColor,
+      color: textColor,
     },
   });
 }
@@ -38,11 +39,14 @@ const FormComponent = ({ fields }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [profession, setProfession] = useState("");
+
   useEffect(() => {
     console.log(location);
 
     setProfession(location.search.split("=")[1]);
   }, []);
+
+  const dispatch = useDispatch()
 
   const validate = () => {
     let tempErrors = {};
@@ -108,7 +112,13 @@ const FormComponent = ({ fields }) => {
         .then((res) => {
           console.log(res.data);
           if (res.data.message === "Patient created") {
-            navigate("/");
+            showToast(
+              "SignUp Successful, Please Login",
+              "#23C552",
+              "white",
+              2000
+            );
+            navigate("/login");
           }
         })
         .catch((err) => console.log(err));
@@ -120,20 +130,23 @@ const FormComponent = ({ fields }) => {
         .then((res) => {
           console.log(res.data);
           if (res.data.message === "Patient not found") {
-            showToast('Email do not exists, Please SignUp', '#F84F31', 'white', 2000)
-            navigate('/signup')
-          }
-          else if(res.data.message === "Invalid password"){
-            setErrors({password: 'Invalid Password' })
-          }
-          else if(res.data.message === 'Patient logged in successfully'){
-            localStorage.setItem('jwt', res.data.token)
-            showToast('Login Successful', '#23C552', 'white', 2000)
-            navigate('/')
-          }
-          else{
-            showToast('Error: Please try again', '#F84F31', 'white', 2000)
-            navigate('/')
+            showToast(
+              "Email do not exists, Please SignUp",
+              "#F84F31",
+              "white",
+              2000
+            );
+            navigate("/signup");
+          } else if (res.data.message === "Invalid password") {
+            setErrors({ password: "Invalid Password" });
+          } else if (res.data.message === "Patient logged in successfully") {
+            localStorage.setItem("token", res.data.token);
+            dispatch(login({token: res.data.token}))
+            showToast("Login Successful", "#23C552", "white", 2000);
+            navigate("/");
+          } else {
+            showToast("Error: Please try again", "#F84F31", "white", 2000);
+            navigate("/");
           }
         })
         .catch((err) => console.log(err));
@@ -173,7 +186,7 @@ const FormComponent = ({ fields }) => {
       } else {
         return (
           <FormControl
-            error={errors[field.name]? true:false}
+            error={errors[field.name] ? true : false}
             key={index}
             sx={{ minWidth: "30vw", margin: "10px" }}
           >
@@ -198,7 +211,7 @@ const FormComponent = ({ fields }) => {
   return (
     // <ThemeProvider >
 
-    <form onSubmit={handleSubmit}  >
+    <form onSubmit={handleSubmit}>
       <Box
         sx={{
           display: "flex",

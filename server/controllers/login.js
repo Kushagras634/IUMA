@@ -3,7 +3,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 exports.login = (req, res) => {
-  Patient.findOne({ email: req.body.email }, async (err, patient) => {
+
+  const {email, password} = req.body
+
+  Patient.findOne({ email: email }, async (err, patient) => {
     if (err) {
       return res.status(500).send({
         message: "An error occurred while finding the patient",
@@ -19,7 +22,7 @@ exports.login = (req, res) => {
 
     // Check if password is correct
     const passwordMatch = await bcrypt.compare(
-      req.body.password,
+      password,
       patient.password
     );
     if (!passwordMatch) {
@@ -29,11 +32,12 @@ exports.login = (req, res) => {
     }
 
     // Create JWT token
-    const token = jwt.sign({ id: patient._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: patient._id, email  }, process.env.JWT_SECRET,{expiresIn: '3h'} );
 
     return res.status(200).send({
       message: "Patient logged in successfully",
       token: token,
+      email: email,
     });
   });
 };
