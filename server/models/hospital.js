@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
+const addressSchema = require('./address'); 
 
 const HospitalSchema = new mongoose.Schema({
     name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true },
     password: { type: String, required: true },
-    mobile: { type: Number, required: true },
-    accountType: {type: String, required: true},
-    address: {
-        street: { type: String, required: true },
-        houseNumber: { type: String, required: true },
-        city: { type: String, required: true },
-        state: { type: String, required: true }
-    }
-});
-
+    cpassword: { type: String, required: true },
+    contactNumber: { type: Number, required: true },
+    address: { type: addressSchema, required: true },
+    registrationNumber: { type: String, required: true },
+    licenseNumber: { type: String, required: true },
+    licenseIssuingAuthority: { type: String, required: true },
+    licenseExpirationDate: { type: Date, required: true },
+    facilities: { type: [String], required: true },
+  });
 
 const Hospital = mongoose.model('Patient', HospitalSchema);
 

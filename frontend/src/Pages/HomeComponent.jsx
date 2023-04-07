@@ -103,7 +103,7 @@ const HomeComponent = () => {
                 variant="outlined"
                 color="primary"
                 component={Link}
-                to='/'
+                to='/search'
                 sx={{ margin: "1rem", padding: "1rem 2rem ",border: "2px solid", fontSize: '1rem' }}
               >
                 Search Doctors

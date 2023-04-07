@@ -9,6 +9,7 @@ import Services from "./Components/ServicesComponent/ServicesComponent";
 import Login from "./Pages/LoginComponent";
 import Sign from "./Pages/SignupComponent";
 import Dashboard from "./Pages/Dashboard";
+import Search from "./Pages/Search";
 
 const MainComponent = () => {
   return (
@@ -24,6 +25,7 @@ const MainComponent = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Sign />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </Router>
     </>
