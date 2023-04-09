@@ -10,9 +10,10 @@ import pharmacy from "../assets/pharmacy.jpg";
 import hospital from "../assets/hospital.webp";
 import laboratory from "../assets/laboratory.jpg";
 
-import {  Stack, Typography, Box } from "@mui/material";
+import { Stack, Typography, Box } from "@mui/material";
 
 import CardComponent from "../Components/CardComponent";
+import HeaderComponent from "../Components/HeaderComponent";
 
 const patient_field_list = [
   { label: "Full Name", name: "name", type: "text" },
@@ -37,9 +38,21 @@ const doctor_field_list = [
   { label: "City", name: "address.city", type: "text" },
   { label: "State", name: "address.state", type: "text" },
   { label: "Specialization", name: "specialization", type: "text" },
-  { label: "Medical License Number", name: "medicalLicenseNumber", type: "text" },
-  { label: "License Issuing Authority", name: "licenseIssuingAuthority", type: "text" },
-  { label: "License Expiration Date", name: "licenseExpirationDate", type: "date" },
+  {
+    label: "Medical License Number",
+    name: "medicalLicenseNumber",
+    type: "text",
+  },
+  {
+    label: "License Issuing Authority",
+    name: "licenseIssuingAuthority",
+    type: "text",
+  },
+  {
+    label: "License Expiration Date",
+    name: "licenseExpirationDate",
+    type: "date",
+  },
   { label: "Qualifications", name: "qualifications", type: "text" },
   { label: "Practice Name", name: "practiceName", type: "text" },
   { label: "Practice Location", name: "practiceLocation", type: "text" },
@@ -58,12 +71,30 @@ const hospital_field_list = [
   { label: "State", name: "address.state", type: "text" },
   { label: "Registration Number", name: "registrationNumber", type: "text" },
   { label: "License Number", name: "licenseNumber", type: "text" },
-  { label: "License Issuing Authority", name: "licenseIssuingAuthority", type: "text" },
-  { label: "License Expiration Date", name: "licenseExpirationDate", type: "date" },
-  { label: "Facilities", name: "facilities", type: "multiselect", options: ["Emergency Services", "Laboratory Services", "Radiology Services", "Pharmacy Services"] },
+  {
+    label: "License Issuing Authority",
+    name: "licenseIssuingAuthority",
+    type: "text",
+  },
+  {
+    label: "License Expiration Date",
+    name: "licenseExpirationDate",
+    type: "date",
+  },
+  {
+    label: "Facilities",
+    name: "facilities",
+    type: "multiselect",
+    options: [
+      "Emergency Services",
+      "Laboratory Services",
+      "Radiology Services",
+      "Pharmacy Services",
+    ],
+  },
 ];
 
-const pharmacy_field_list =[
+const pharmacy_field_list = [
   { label: "Pharmacy Name", name: "name", type: "text" },
   { label: "Email", name: "email", type: "email" },
   { label: "Password", name: "password", type: "password" },
@@ -74,12 +105,25 @@ const pharmacy_field_list =[
   { label: "State", name: "address.state", type: "text" },
   { label: "Registration Number", name: "registrationNumber", type: "text" },
   { label: "License Number", name: "licenseNumber", type: "text" },
-  { label: "License Issuing Authority", name: "licenseIssuingAuthority", type: "text" },
-  { label: "License Expiration Date", name: "licenseExpirationDate", type: "date" },
-  { label: "Facilities Provided", name: "facilities", type: "checkbox", options: ["Medicines", "Medical Equipment", "Healthcare Products"] },
+  {
+    label: "License Issuing Authority",
+    name: "licenseIssuingAuthority",
+    type: "text",
+  },
+  {
+    label: "License Expiration Date",
+    name: "licenseExpirationDate",
+    type: "date",
+  },
+  {
+    label: "Facilities Provided",
+    name: "facilities",
+    type: "checkbox",
+    options: ["Medicines", "Medical Equipment", "Healthcare Products"],
+  },
 ];
 
-const lab_field_list =[
+const lab_field_list = [
   { label: "Medical Laboratory Name", name: "name", type: "text" },
   { label: "Email", name: "email", type: "email" },
   { label: "Password", name: "password", type: "password" },
@@ -90,11 +134,35 @@ const lab_field_list =[
   { label: "State", name: "address.state", type: "text" },
   { label: "Registration Number", name: "registrationNumber", type: "text" },
   { label: "License Number", name: "licenseNumber", type: "text" },
-  { label: "License Issuing Authority", name: "licenseIssuingAuthority", type: "text" },
-  { label: "License Expiration Date", name: "licenseExpirationDate", type: "date" },
-  { label: "Facilities Provided", name: "facilities", type: "checkbox", options: ["Blood Tests", "Urine Tests", "Pathology Tests", "X-ray Services", "Microbiology Tests", "Genetic Testing"] },
-  { label: "Accept Terms & Conditions", name: "termsAndConditionsAccepted", type: "checkbox" },
-  { label: "Captcha Verification", name: "captchaVerified", type: "checkbox" }
+  {
+    label: "License Issuing Authority",
+    name: "licenseIssuingAuthority",
+    type: "text",
+  },
+  {
+    label: "License Expiration Date",
+    name: "licenseExpirationDate",
+    type: "date",
+  },
+  {
+    label: "Facilities Provided",
+    name: "facilities",
+    type: "checkbox",
+    options: [
+      "Blood Tests",
+      "Urine Tests",
+      "Pathology Tests",
+      "X-ray Services",
+      "Microbiology Tests",
+      "Genetic Testing",
+    ],
+  },
+  {
+    label: "Accept Terms & Conditions",
+    name: "termsAndConditionsAccepted",
+    type: "checkbox",
+  },
+  { label: "Captcha Verification", name: "captchaVerified", type: "checkbox" },
 ];
 
 const SignupComponent = () => {
@@ -131,6 +199,7 @@ const SignupComponent = () => {
 
   return (
     <>
+      <HeaderComponent />
       {
         {
           null: (

@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Components/HeaderComponent";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Appointments from "./Components/AppointmentsComponent/AppointmentsComponent";
 import Blogs from "./Components/BlogsComponent/BlogsComponent";
@@ -15,7 +15,7 @@ const MainComponent = () => {
   return (
     <>
       <Router>
-        <Header />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/blogs" element={<Blogs />} />

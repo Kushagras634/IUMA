@@ -4,6 +4,7 @@
   "private": false,
   "proxy": "http://localhost:8000",
   "dependencies": {
+    "@date-io/date-fns": "^2.16.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
@@ -17,6 +18,8 @@
     "axios": "^1.2.3",
     "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
+    "react-appointment-picker": "^3.2.1",
+    "react-calendar": "^4.2.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
     "react-redux": "^8.0.5",

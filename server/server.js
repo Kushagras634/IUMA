@@ -26,6 +26,7 @@ const bodyParser = require('body-parser');
 
 const patientRoutes = require('./routes/paitents')
 const loginRoute= require('./routes/login')
+const miscellaneousRoute = require('./routes/miscellaneous')
 
 
 conn.on('error', (error) => {
@@ -43,6 +44,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // your routes goes here
 app.use('/patient', patientRoutes);
 app.use('/login', loginRoute)
+app.use('/miscellaneous', miscellaneousRoute)
 
 app.use(express.static('build'));
 
