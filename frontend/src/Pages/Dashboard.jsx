@@ -142,7 +142,6 @@ const Dashboard = () => {
               >
                 <CardActionArea
                   sx={{
-                    background: "rgb(9,21,121)",
                     background:
                       "linear-gradient(27deg, rgba(9,21,121,1) 23%, rgba(116,5,128,1) 71%, rgba(255,0,138,1) 100%)",
                   }}

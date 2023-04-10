@@ -2,12 +2,7 @@ import React from "react";
 import SvgComponent from "../Components/mainSVGComponent";
 import CardComponent from "../Components/CardComponent";
 import Button from "@mui/material/Button";
-import {
-  Box,
-  Typography,
-  createTheme,
-  Stack,
-} from "@mui/material";
+import { Box, Typography, createTheme, Stack } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import { Link } from "react-router-dom";
 import Header from "../Components/HeaderComponent";
@@ -21,6 +16,7 @@ import KidneyTest from "../assets/kidney.png";
 import ThyroidTest from "../assets/thyroid-test.png";
 import XrayTest from "../assets/x-ray.png";
 import UrineTest from "../assets/urine-test.png";
+import Footer from "../Components/Footer";
 
 const cards = [
   {
@@ -180,12 +176,11 @@ const HomeComponent = () => {
         </Box>
 
         <Box sx={{ margin: "2rem" }}>
-          <Stack direction='row' justifyContent='space-between' >
+          <Stack direction="row" justifyContent="space-between">
             <Typography variant="h4" color="initial">
               Get Tested
             </Typography>
             <Link href="#">show more </Link>
-            
           </Stack>
 
           <Stack direction="row" justifyContent="center ">
@@ -197,6 +192,7 @@ const HomeComponent = () => {
           </Stack>
         </Box>
       </main>
+      <Footer/>
     </ThemeProvider>
   );
 };
