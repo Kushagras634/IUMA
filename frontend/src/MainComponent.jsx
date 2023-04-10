@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./Components/HeaderComponent";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Appointments from "./Components/AppointmentsComponent/AppointmentsComponent";
 import Blogs from "./Components/BlogsComponent/BlogsComponent";
@@ -9,12 +9,13 @@ import Services from "./Components/ServicesComponent/ServicesComponent";
 import Login from "./Pages/LoginComponent";
 import Sign from "./Pages/SignupComponent";
 import Dashboard from "./Pages/Dashboard";
+import Search from "./Pages/Search";
 
 const MainComponent = () => {
   return (
     <>
       <Router>
-        <Header />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/blogs" element={<Blogs />} />
@@ -24,6 +25,7 @@ const MainComponent = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Sign />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </Router>
     </>

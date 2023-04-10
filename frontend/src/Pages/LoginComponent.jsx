@@ -2,6 +2,7 @@ import React from "react";
 import Form from "../Components/FormComponent";
 import sideImg from "../assets/4587.jpg";
 import { Box, Typography } from "@mui/material";
+import HeaderComponent from "../Components/HeaderComponent";
 
 const field_list = [
   { label: "Login email or mobile  number", name: 'email', type : 'text' },
@@ -9,6 +10,8 @@ const field_list = [
 ];
 const LoginComponent = () => {
   return (
+    <>
+    <HeaderComponent/>
     <Box
       sx={{
         display: "flex",
@@ -29,6 +32,7 @@ const LoginComponent = () => {
         buton="Log in"
       />
     </Box>
+    </>
   );
 };
 
