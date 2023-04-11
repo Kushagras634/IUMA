@@ -2,36 +2,24 @@ import React, { useState } from "react";
 import CustomTable from "../Components/TableComponent";
 import profile from "../assets/profile.jpg";
 import {
-  Card,
   Stack,
-  Toolbar,
   Typography,
-  CardContent,
-  Container,
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  ListItemIcon,
-  CardHeader,
   Avatar,
-  IconButton,
-  CardActionArea,
-  Paper,
-  CardMedia,
+  TextField,
+  FormControl,
+  FormLabel,
+  FormHelperText,
+  Button,
+  Box,
+  List, ListItem, ListItemButton
 } from "@mui/material";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import MenuIcon from "@mui/icons-material/Menu";
-import CardComponent from "../Components/CardComponent";
-import Prescription from "../Components/PrescriptionComponent";
-import PatientForm from "../Components/PatientDetails";
-import doctorNearfrom from "../assets/Asset 2.png";
 
-import CalenderComponent from "../Components/CalendarComponent";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-import CottageOutlinedIcon from "@mui/icons-material/CottageOutlined";
+import profileImg from "../assets/profile.jpg";
+
+import DownloadIcon from "@mui/icons-material/Download";
+import DashboardSidepanel from "../Components/DashboardSidepanel";
+import DataTable from "../Components/DynamicTable";
+import Heart from '../assets/heart.png'
 
 const Dashboard = () => {
   const medical_data = {
@@ -99,139 +87,208 @@ const Dashboard = () => {
   ];
 
   return (
-    <Stack direction="row">
-      <List
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "80vh",
-        }}
-      >
-        {[
+    <Stack direction="row" sx={{ backgroundColor: "#e3e1e1" }}>
+      {/* Sidepanel */}
+      <DashboardSidepanel
+        values={[
           "Dashboard",
           "Profile",
           "Prescription",
           "Refferals",
           "Appointments",
           "Charts",
-        ].map((text, index) => (
-          <ListItem key={index} sx={{ margin: "0rem .2rem" }}>
-            <ListItemButton>
-              <ListItemIcon sx={{ minWidth: "30px" }}>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+        ]}
+      />
+      {/* Main Dashboard */}
       <Stack direction="column" sx={{ width: "90%", padding: "1rem" }}>
-        <Typography variant="h4" color="initial">
-          Dashboard
-        </Typography>
-        <Stack direction="row" sx={{ padding: "1rem 0" }}>
-          <Stack sx={{ width: "50%" }}>
-            <Stack direction="row">
-              <Card
-                variant="oulined"
-                sx={{
-                  margin: "1rem .5rem",
-                  borderRadius: "10px",
-                  width: "50%",
-                }}
-              >
-                <CardActionArea
-                  sx={{
-                    background:
-                      "linear-gradient(27deg, rgba(9,21,121,1) 23%, rgba(116,5,128,1) 71%, rgba(255,0,138,1) 100%)",
-                  }}
-                >
-                  <CardHeader
-                    action={
-                      <IconButton aria-label="">
-                        <AddCircleOutlineOutlinedIcon
-                          sx={{
-                            backgroundColor: "white",
-                            color: "black",
-                            borderRadius: "50%",
-                            fontSize: "2rem",
-                          }}
-                        />
-                      </IconButton>
-                    }
-                    title=""
-                    subheader=""
-                  />
-                  <CardContent>
-                    <Typography variant="button" color="white">
-                      Make a clinic Appointment
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-              <Card
-                variant="oulined"
-                sx={{
-                  margin: "1rem .5rem",
-                  borderRadius: "10px",
-                  width: "50%",
-                }}
-              >
-                <CardActionArea
-                  sx={{
-                    backgroundColor: "#f3d7ff",
-                  }}
-                >
-                  <CardHeader
-                    action={
-                      <IconButton aria-label="">
-                        <CottageOutlinedIcon
-                          sx={{
-                            backgroundColor: "white",
-                            color: "black",
-                            borderRadius: "50%",
-                            fontSize: "2rem",
-                          }}
-                        />
-                      </IconButton>
-                    }
-                    title=""
-                    subheader=""
-                  />
-                  <CardContent>
-                    <Typography variant="button" color="black">
-                      Request A Home Visit
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Stack>
-            <Stack direction="row">
-              <CalenderComponent />
-              <Card sx={{ margin: "1rem .5rem", width: "50%" }}>
-                <CardContent>
-                  <Typography variant="subtitle1" color="initial">
-                    Recent Appointments
-                  </Typography>
-                  <List>
-                    <ListItem>Hello</ListItem>
-                  </List>
-                </CardContent>
-              </Card>
-            </Stack>
-            <Card sx={{ display: "flex", height: '170px', marginTop: '.5rem' }}>
-              <CardContent>
-                <Typography>Find Doctors near you</Typography>
-              </CardContent>
-              <CardMedia
-                title="doctor near you"
-                image={doctorNearfrom}
-                component="img"
-                sx={{ width: "100%", height: "100px", objectFit: 'contain' }}
-              />
-            </Card>
+        {/* Dashboard Header */}
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          sx={{
+            backgroundColor: "white",
+            padding: ".5rem",
+            borderRadius: "5px",
+          }}
+        >
+          <Typography variant="h4" color="initial">
+            Hello, Jeevesh
+          </Typography>
+          <Stack direction="column">
+            <Avatar
+              id="avatar-button"
+              alt="Profile Image"
+              src={profileImg}
+              sx={{ marginLeft: "2rem" }}
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+            />
           </Stack>
-          <Stack sx={{ width: "50%" }}></Stack>
+        </Stack>
+        <Stack direction="row">
+          {/* New Appointment  */}
+          <Stack direction="column" width="65%">
+            <Box
+              sx={{
+                backgroundColor: "white",
+                padding: ".5rem",
+                margin: "1rem 0",
+                borderRadius: "5px",
+              }}
+            >
+              <Typography variant="h6" color="initial" padding={2}>
+                New Appointment
+              </Typography>
+              <Stack direction="row">
+                <FormControl sx={{ margin: "0 .5rem", width: "100%" }}>
+                  <TextField
+                    name="Speciality"
+                    id="speciality"
+                    label="Speciality"
+                    type="text"
+                    fullWidth
+                  />
+                  <FormHelperText></FormHelperText>
+                </FormControl>
+                <FormControl sx={{ margin: "0 .5rem", width: "100%" }}>
+                  <TextField
+                    name="Location"
+                    id="location"
+                    label="Location"
+                    type="text"
+                    fullWidth
+                  />
+                  <FormHelperText></FormHelperText>
+                </FormControl>
+                <Button
+                  variant="contained"
+                  sx={{
+                    margin: "0 .5rem",
+                    padding: "0",
+                    width: "50%",
+                    height: "54px",
+                  }}
+                >
+                  See Doctors
+                </Button>
+              </Stack>
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: "white",
+                padding: ".5rem",
+                margin: "1rem 0",
+                borderRadius: "5px",
+              }}
+            >
+              <Typography variant="h6" color="initial" padding={2}>
+                Ongoing Treatments
+              </Typography>
+              <DataTable
+                data={[
+                  {
+                    medicine: "UltraVit OMEGA + DHA",
+                    amount: "1/ x2",
+                    time: "Before Eating",
+                    duration: "2 months",
+                  },
+                ]}
+              />
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: "white",
+                padding: ".5rem",
+                margin: "1rem 0",
+                borderRadius: "5px",
+              }}
+            >
+              <Typography variant="h6" color="initial" padding={2}>
+                Test Results
+              </Typography>
+              <DataTable
+                data={[
+                  {
+                    type: "Glucose Blood Test",
+                    result: "Pending",
+                    date: "27/08/2022",
+                    Download: <DownloadIcon />,
+                  },
+                  {
+                    type: "Electrocardiogram",
+                    result: "Require Attention",
+                    date: "27/08/2022",
+                    Download: <DownloadIcon />,
+                  },
+                ]}
+              />
+            </Box>
+          </Stack>
+
+          <Stack direction="column" width="30%" margin='0 1rem'>
+            <Box
+              sx={{
+                backgroundColor: "white",
+                padding: ".5rem",
+                margin: "1rem 0",
+                borderRadius: "5px",
+              }}
+            >
+              <Typography variant="h5" color="initial" padding={1}>Find Specialist</Typography>
+              <Typography variant="subtitle1" color="initial">Choose your category</Typography>
+              <List>
+                <ListItem>
+                  <ListItemButton>
+                    <Stack direction='row' alignItems='center'>
+                      <img src={Heart} alt="heart" style={{width:'50px', height:'50px', padding:' 0 1rem 0 0'}}/>
+                      <div>
+                        <Typography variant="subtitle1" color="red" lineHeight={1.2} >Cardiology</Typography>
+                        <Typography variant="subtitle1" color="initial" lineHeight={1.2} >Dr. Suresh Chandra</Typography>
+                        <Typography variant="caption" color="initial">02/08/22, 10:00 - 10:30</Typography>
+                      </div>
+                    </Stack>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton>
+                    <Stack direction='row' alignItems='center'>
+                      <img src={Heart} alt="heart" style={{width:'50px', height:'50px', padding:' 0 1rem 0 0'}}/>
+                      <div>
+                        <Typography variant="subtitle1" color="red" lineHeight={1.2} >Cardiology</Typography>
+                        <Typography variant="subtitle1" color="initial" lineHeight={1.2} >Dr. Suresh Chandra</Typography>
+                        <Typography variant="caption" color="initial">02/08/22, 10:00 - 10:30</Typography>
+                      </div>
+                    </Stack>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton>
+                    <Stack direction='row' alignItems='center'>
+                      <img src={Heart} alt="heart" style={{width:'50px', height:'50px', padding:' 0 1rem 0 0'}}/>
+                      <div>
+                        <Typography variant="subtitle1" color="red" lineHeight={1.2} >Cardiology</Typography>
+                        <Typography variant="subtitle1" color="initial" lineHeight={1.2} >Dr. Suresh Chandra</Typography>
+                        <Typography variant="caption" color="initial">02/08/22, 10:00 - 10:30</Typography>
+                      </div>
+                    </Stack>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem>
+                  <ListItemButton>
+                    <Stack direction='row' alignItems='center'>
+                      <img src={Heart} alt="heart" style={{width:'50px', height:'50px', padding:' 0 1rem 0 0'}}/>
+                      <div>
+                        <Typography variant="subtitle1" color="red" lineHeight={1.2} >Cardiology</Typography>
+                        <Typography variant="subtitle1" color="initial" lineHeight={1.2} >Dr. Suresh Chandra</Typography>
+                        <Typography variant="caption" color="initial">02/08/22, 10:00 - 10:30</Typography>
+                      </div>
+                    </Stack>
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </Box>
+          </Stack>
         </Stack>
       </Stack>
     </Stack>
