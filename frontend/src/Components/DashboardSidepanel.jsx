@@ -11,29 +11,25 @@ import {
 
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import { useNavigate } from "react-router-dom";
+import logo from '../assets/logo.png'
 
 const DashboardSidepanel = ({ values }) => {
+  const navigate = useNavigate();
   return (
-    <List
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        backgroundColor: "#003049",
-        color: "white",
-        minHeight: "100vh",
-      }}
-    >
+    <List className="w-56 flex flex-col text-white h-screen align-middle top-0 left-0 fixed bg-sidepanel" >
+      <img src={logo} alt="" className="w-1/3 py-2 self-center mb-6" />
       {values.map((text, index) => (
-        <ListItem key={index} sx={{ margin: "0rem .2rem" }}>
-          <ListItemButton>
-            <ListItemIcon sx={{ minWidth: "30px" }}>
+        <ListItem key={index} className="my-1">
+          <ListItemButton href={text.url}>
+            <ListItemIcon className="w-1/5" >
               {index % 2 === 0 ? (
-                <InboxIcon sx={{ color: "white" }} />
+                <InboxIcon className="text-white" />
               ) : (
-                <MailIcon sx={{ color: "white" }} />
+                <MailIcon className="text-white" />
               )}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={text.name} />
           </ListItemButton>
         </ListItem>
       ))}

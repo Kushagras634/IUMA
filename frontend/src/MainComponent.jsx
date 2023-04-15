@@ -8,8 +8,9 @@ import Home from "./Pages/HomeComponent";
 import Services from "./Components/ServicesComponent/ServicesComponent";
 import Login from "./Pages/LoginComponent";
 import Sign from "./Pages/SignupComponent";
-import Dashboard from "./Pages/Dashboard";
+import Dashboard from "./Pages/PatientDashboard";
 import Search from "./Pages/Search";
+import DashboardRouter from "./Pages/DashboardRouter";
 
 const MainComponent = () => {
   return (
@@ -24,7 +25,7 @@ const MainComponent = () => {
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Sign />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/*" element={<DashboardRouter />} />
           <Route path="/search" element={<Search />} />
         </Routes>
       </Router>
