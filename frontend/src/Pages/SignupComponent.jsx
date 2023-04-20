@@ -115,12 +115,7 @@ const pharmacy_field_list = [
     name: "licenseExpirationDate",
     type: "date",
   },
-  {
-    label: "Facilities Provided",
-    name: "facilities",
-    type: "checkbox",
-    options: ["Medicines", "Medical Equipment", "Healthcare Products"],
-  },
+  
 ];
 
 const lab_field_list = [
@@ -144,25 +139,6 @@ const lab_field_list = [
     name: "licenseExpirationDate",
     type: "date",
   },
-  {
-    label: "Facilities Provided",
-    name: "facilities",
-    type: "checkbox",
-    options: [
-      "Blood Tests",
-      "Urine Tests",
-      "Pathology Tests",
-      "X-ray Services",
-      "Microbiology Tests",
-      "Genetic Testing",
-    ],
-  },
-  {
-    label: "Accept Terms & Conditions",
-    name: "termsAndConditionsAccepted",
-    type: "checkbox",
-  },
-  { label: "Captcha Verification", name: "captchaVerified", type: "checkbox" },
 ];
 
 const SignupComponent = () => {
@@ -256,6 +232,7 @@ const SignupComponent = () => {
               >
                 Sign Up{" "}
               </Typography>
+              
               <Form
                 fields={patient_field_list}
                 img={signUpImage}
@@ -263,6 +240,7 @@ const SignupComponent = () => {
                 buton="Sign Up"
                 image="doctor.png"
                 redirectTo="/"
+                type="patient"
               />
             </Box>
           ),
@@ -290,6 +268,7 @@ const SignupComponent = () => {
                 buton="Sign Up"
                 image="doctor.png"
                 redirectTo="/"
+                type="doctor"
               />
             </Box>
           ),
@@ -317,6 +296,7 @@ const SignupComponent = () => {
                 buton="Sign Up"
                 image="doctor.png"
                 redirectTo="/"
+                type="pharmacy"
               />
             </Box>
           ),
@@ -344,6 +324,7 @@ const SignupComponent = () => {
                 buton="Sign Up"
                 image="doctor.png"
                 redirectTo="/"
+                type="hospital"
               />
             </Box>
           ),
@@ -371,6 +352,7 @@ const SignupComponent = () => {
                 buton="Sign Up"
                 image="doctor.png"
                 redirectTo="/"
+                type="laboratory"
               />
             </Box>
           ),

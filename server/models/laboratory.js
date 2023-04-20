@@ -12,9 +12,10 @@ const LaboratorySchema = new mongoose.Schema({
     licenseIssuingAuthority: { type: String, required: true },
     licenseExpirationDate: { type: Date, required: true },
     facilities: { type: [String], required: true },
-  });
+    profession: {type: String, required: true},
+  }, { collection: 'users' });
 
 
-const Laboratory = mongoose.model('Laboratory', LaboratorySchema);
+const Laboratory = mongoose.model('laboratory', LaboratorySchema);
 
 module.exports = Laboratory;

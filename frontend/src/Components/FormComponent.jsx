@@ -3,7 +3,7 @@ import axios from "axios";
 // import TextField from "@mui/material/TextField";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "react-redux";
 import { login } from "../redux/actions/authAction";
 
 import {
@@ -13,6 +13,11 @@ import {
   Typography,
   Button,
   Box,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
 
 import { useLocation, useNavigate } from "react-router-dom";
@@ -32,7 +37,7 @@ function showToast(message, color, textColor, duration) {
   });
 }
 
-const FormComponent = ({ fields }) => {
+const FormComponent = ({ fields, type }) => {
   // const classes = useStyles();
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
@@ -46,7 +51,7 @@ const FormComponent = ({ fields }) => {
     setProfession(location.search.split("=")[1]);
   }, []);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const validate = () => {
     let tempErrors = {};
@@ -102,13 +107,15 @@ const FormComponent = ({ fields }) => {
     if (!validate()) {
       return;
     }
-    console.log(formData);
 
     if (location.pathname === "/signup") {
-      let url = "http://localhost:8000/" + profession.toLowerCase() + "/signup";
+      let url = "http://localhost:8000/auth/register";
       console.log(url);
+      var data = formData;
+      data["profession"] = type;
+      console.log(data);
       axios
-        .post(url, formData)
+        .post(url, data)
         .then((res) => {
           console.log(res.data);
           if (res.data.message === "Patient created") {
@@ -123,7 +130,7 @@ const FormComponent = ({ fields }) => {
         })
         .catch((err) => console.log(err));
     } else if (location.pathname === "/login") {
-      let url = "http://localhost:8000/login";
+      let url = "http://localhost:8000/auth/login";
       console.log(url);
       axios
         .post(url, formData)
@@ -136,12 +143,12 @@ const FormComponent = ({ fields }) => {
               "white",
               2000
             );
-            navigate("/signup");
+            // navigate("/signup"); 
           } else if (res.data.message === "Invalid password") {
             setErrors({ password: "Invalid Password" });
           } else if (res.data.message === "Patient logged in successfully") {
             localStorage.setItem("token", res.data.token);
-            dispatch(login({token: res.data.token}))
+            dispatch(login({ token: res.data.token }));
             showToast("Login Successful", "#23C552", "white", 2000);
             navigate("/");
           } else {
@@ -155,40 +162,58 @@ const FormComponent = ({ fields }) => {
 
   const renderFields = () => {
     return fields.map((field, index) => {
-      if (field.type === "group") {
+      if (field.type === "date") {
         return (
-          <React.Fragment key={index}>
-            <Typography variant="h6">{field.label}</Typography>
-            <Box display="flex" flexDirection="column">
-              {field.fields.map((subField, subIndex) => {
-                return (
-                  <Box flex="1 0 50%" key={subIndex}>
-                    <FormControl error={errors[subField.name]}>
-                      <TextField
-                        id={subField.name}
-                        label={subField.label}
-                        name={subField.name}
-                        type={subField.type}
-                        fullWidth
-                        required
-                        onChange={handleChange}
-                      />
-                      {errors[subField.name] && (
-                        <FormHelperText>{errors[subField.name]}</FormHelperText>
-                      )}
-                    </FormControl>
-                  </Box>
-                );
-              })}
-            </Box>
-          </React.Fragment>
+          <FormControl
+            error={errors[field.name] ? true : false}
+            key={index}
+            sx={{ margin: "10px" }}
+          >
+            <TextField
+              id={field.name}
+              label={field.label}
+              name={field.name}
+              type={field.type}
+              InputLabelProps={{
+                shrink: true,
+              }}
+              fullWidth
+              required
+              onChange={handleChange}
+            />
+            {errors[field.name] && (
+              <FormHelperText>{errors[field.name]}</FormHelperText>
+            )}
+          </FormControl>
+        );
+      } else if (field.type === "multiselect") {
+        return (
+          <FormControl
+            error={errors[field.name] ? true : false}
+            key={index}
+            sx={{ margin: "10px" }}
+          >
+            <InputLabel>{field.label}</InputLabel>
+            <Select
+              onChange={handleChange}
+              name={field.name}
+              defaultValue={""}
+              label={field.label}
+            >
+              {field.options.map((option) => (
+                <MenuItem key={option} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         );
       } else {
         return (
           <FormControl
             error={errors[field.name] ? true : false}
             key={index}
-            sx={{ minWidth: "30vw", margin: "10px" }}
+            sx={{ margin: "10px" }}
           >
             <TextField
               id={field.name}
@@ -211,21 +236,14 @@ const FormComponent = ({ fields }) => {
   return (
     // <ThemeProvider >
 
-    <form onSubmit={handleSubmit}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          minWidth: "40vw",
-        }}
-      >
-        {renderFields()}
-        <Button type="submit" variant="contained" sx={{ minWidth: "30vw" }}>
-          Submit
-        </Button>
-      </Box>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col justify-center w-full items-center"
+    >
+      <Box className="grid gap-1 grid-cols-2 w-2/4">{renderFields()}</Box>
+      <Button type="submit" variant="contained" sx={{ minWidth: "30vw" }}>
+        Submit
+      </Button>
     </form>
 
     // </ThemeProvider>
