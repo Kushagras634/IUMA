@@ -14,6 +14,7 @@ import { Stack, Typography, Box } from "@mui/material";
 
 import CardComponent from "../Components/CardComponent";
 import HeaderComponent from "../Components/HeaderComponent";
+import FormComponent from "../Components/FormComponent";
 
 const patient_field_list = [
   { label: "Full Name", name: "name", type: "text" },
@@ -115,7 +116,6 @@ const pharmacy_field_list = [
     name: "licenseExpirationDate",
     type: "date",
   },
-  
 ];
 
 const lab_field_list = [
@@ -168,6 +168,31 @@ const SignupComponent = () => {
     },
   ];
 
+  const OcupationCards = ({ ocupation }) => (
+    <Stack
+      direction="row"
+      flexWrap={`wrap`}
+      justifyContent={`center`}
+      alignItems={`center`}
+      className="mt-4 w-2/4 m-auto"
+    >
+      {ocupation.map((ele, idx) => {
+        return (
+          <CardComponent
+            key={idx}
+            title={ele.title}
+            img={ele.img}
+            cardWidth="300px"
+            imgWidth="200px"
+            imgHeight="200px"
+            link={`/signup?prof=${ele.title}`}
+            margin="1rem"
+          />
+        );
+      })}
+    </Stack>
+  );
+
   useEffect(() => {
     setLocation(new URLSearchParams(params).get("prof"));
   }, [params]);
@@ -178,53 +203,9 @@ const SignupComponent = () => {
       <HeaderComponent />
       {
         {
-          null: (
-            <>
-              <Stack
-                direction="column"
-                sx={{
-                  minHeight: "85vh",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Stack
-                  direction="row"
-                  sx={{
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexWrap: "wrap",
-                    maxWidth: "60vw",
-                  }}
-                >
-                  {ocupation.map((ele, idx) => {
-                    return (
-                      <CardComponent
-                        key={idx}
-                        title={ele.title}
-                        img={ele.img}
-                        cardWidth="300px"
-                        imgWidth="200px"
-                        imgHeight="200px"
-                        link={`/signup?prof=${ele.title}`}
-                        margin="1rem"
-                      />
-                    );
-                  })}
-                </Stack>
-              </Stack>
-            </>
-          ),
+          null: <OcupationCards ocupation={ocupation} />,
           Patient: (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                minHeight: "70vh",
-              }}
-            >
+            <Box className="flex flex-col items-center justify-center">
               <Typography
                 variant="h4"
                 color="initial"
@@ -232,28 +213,12 @@ const SignupComponent = () => {
               >
                 Sign Up{" "}
               </Typography>
-              
-              <Form
-                fields={patient_field_list}
-                img={signUpImage}
-                heading="Sign Up as Patient"
-                buton="Sign Up"
-                image="doctor.png"
-                redirectTo="/"
-                type="patient"
-              />
+
+              <FormComponent fields={patient_field_list} type="patient" />
             </Box>
           ),
           Doctor: (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                minHeight: "70vh",
-              }}
-            >
+            <Box className="flex flex-col items-center justify-center">
               <Typography
                 variant="h4"
                 color="initial"
@@ -261,27 +226,11 @@ const SignupComponent = () => {
               >
                 Sign Up{" "}
               </Typography>
-              <Form
-                fields={doctor_field_list}
-                img={signUpImage}
-                heading="Sign Up as Doctor"
-                buton="Sign Up"
-                image="doctor.png"
-                redirectTo="/"
-                type="doctor"
-              />
+              <FormComponent fields={doctor_field_list} type="doctor" />
             </Box>
           ),
           Pharmacy: (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                minHeight: "70vh",
-              }}
-            >
+            <Box className="flex flex-col items-center justify-center">
               <Typography
                 variant="h4"
                 color="initial"
@@ -289,27 +238,11 @@ const SignupComponent = () => {
               >
                 Sign Up{" "}
               </Typography>
-              <Form
-                fields={pharmacy_field_list}
-                img={signUpImage}
-                heading="Sign Up as Pharmacy"
-                buton="Sign Up"
-                image="doctor.png"
-                redirectTo="/"
-                type="pharmacy"
-              />
+              <Form fields={pharmacy_field_list} type="pharmacy" />
             </Box>
           ),
           Hospital: (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                minHeight: "70vh",
-              }}
-            >
+            <Box className="flex flex-col items-center justify-center">
               <Typography
                 variant="h4"
                 color="initial"
@@ -317,27 +250,11 @@ const SignupComponent = () => {
               >
                 Sign Up{" "}
               </Typography>
-              <Form
-                fields={hospital_field_list}
-                img={signUpImage}
-                heading="Sign Up as Hospital"
-                buton="Sign Up"
-                image="doctor.png"
-                redirectTo="/"
-                type="hospital"
-              />
+              <Form fields={hospital_field_list} type="hospital" />
             </Box>
           ),
           Laboratory: (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                minHeight: "70vh",
-              }}
-            >
+            <Box className="flex flex-col items-center justify-center">
               <Typography
                 variant="h4"
                 color="initial"
@@ -345,15 +262,7 @@ const SignupComponent = () => {
               >
                 Sign Up{" "}
               </Typography>
-              <Form
-                fields={lab_field_list}
-                img={signUpImage}
-                heading="Sign Up as Laboratory"
-                buton="Sign Up"
-                image="doctor.png"
-                redirectTo="/"
-                type="laboratory"
-              />
+              <Form fields={lab_field_list} type="laboratory" />
             </Box>
           ),
         }[location]

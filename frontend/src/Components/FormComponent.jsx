@@ -10,14 +10,11 @@ import {
   TextField,
   FormControl,
   FormHelperText,
-  Typography,
   Button,
   Box,
   InputLabel,
   Select,
   MenuItem,
-  FormControlLabel,
-  Checkbox,
 } from "@mui/material";
 
 import { useLocation, useNavigate } from "react-router-dom";
@@ -43,13 +40,6 @@ const FormComponent = ({ fields, type }) => {
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const location = useLocation();
-  const [profession, setProfession] = useState("");
-
-  useEffect(() => {
-    console.log(location);
-
-    setProfession(location.search.split("=")[1]);
-  }, []);
 
   const dispatch = useDispatch();
 
@@ -77,28 +67,6 @@ const FormComponent = ({ fields, type }) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleRadioChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const handleAddressChange = (event, field) => {
-    setFormData({
-      ...formData,
-      address: { ...formData.address, [field]: event.target.value },
-    });
-    setErrors({ ...errors, [field]: "" });
-  };
-
-  const addAddress = () => {
-    setFormData({
-      ...formData,
-      address: [...formData.address, { street: "", houseNo: "" }],
     });
   };
 
@@ -143,7 +111,7 @@ const FormComponent = ({ fields, type }) => {
               "white",
               2000
             );
-            // navigate("/signup"); 
+            // navigate("/signup");
           } else if (res.data.message === "Invalid password") {
             setErrors({ password: "Invalid Password" });
           } else if (res.data.message === "Patient logged in successfully") {
@@ -240,8 +208,16 @@ const FormComponent = ({ fields, type }) => {
       onSubmit={handleSubmit}
       className="flex flex-col justify-center w-full items-center"
     >
-      <Box className="grid gap-1 grid-cols-2 w-2/4">{renderFields()}</Box>
-      <Button type="submit" variant="contained" sx={{ minWidth: "30vw" }}>
+      <Box
+        className={
+          location.pathname === "/login"
+            ? `flex flex-col w-1/4`
+            : `grid gap-1 grid-cols-2 w-2/4`
+        }
+      >
+        {renderFields()}
+      </Box>
+      <Button type="submit" variant="contained" className="px-10 py-3 mt-8">
         Submit
       </Button>
     </form>
