@@ -15,8 +15,6 @@ import {
   ListItemButton,
 } from "@mui/material";
 
-import profileImg from "../assets/profile.jpg";
-
 import DownloadIcon from "@mui/icons-material/Download";
 import DataTable from "../Components/DynamicTable";
 import Heart from "../assets/heart.png";
@@ -24,7 +22,7 @@ import DashboardHeader from "../Components/DashboardHeader";
 
 const PatientDashboard = () => {
   return (
-    <Stack direction="column" className="w-full p-4 flex-1 ml-56">
+    <Stack direction="column" className="w-full p-4 flex-1 ml-56  ">
       <DashboardHeader />
       <Stack direction="row">
         {/* New Appointment  */}

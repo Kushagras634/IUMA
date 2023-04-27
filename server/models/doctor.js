@@ -16,7 +16,8 @@ const DoctorSchema = new mongoose.Schema({
   practiceName: { type: String },
   practiceLocation: { type: String },
   yearsOfExperience: { type: Number },
-});
+  profession: {type: String, required: true},
+}, { collection: 'users' }  );
 
 const Doctor = mongoose.model("Doctor", DoctorSchema);
 
