@@ -6,7 +6,7 @@ const app = express();
 const cors = require("cors");
 
 const corsOptions = {
-  origin: "*",
+  origin: true,
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
@@ -18,6 +18,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
+  res.header('Access-Control-Allow-Credentials', true);
   next();
 });
 

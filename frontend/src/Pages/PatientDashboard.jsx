@@ -4,10 +4,8 @@ import profile from "../assets/profile.jpg";
 import {
   Stack,
   Typography,
-  Avatar,
   TextField,
   FormControl,
-  FormHelperText,
   Button,
   Box,
   List,

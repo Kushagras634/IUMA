@@ -15,9 +15,8 @@ const DashboardRouter = () => {
             {name: "Dashboard", url: '/dashboard/'},
             {name: "Profile", url:'/dashboard/profile'},
             {name: "Prescription", url:'/dashboard/prescription'},
-            {name:"Refferals", url:'/dashboard/refferals'},
             {name:"Appointments", url:'/dashboard/appointments'},
-            {name: "Charts", url: '/dashboard/charts'}
+            {name:"Search Doctor", url:'/search'}
           ]}
         />
         <Routes>

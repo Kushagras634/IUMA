@@ -2,6 +2,7 @@ import "./App.css";
 import MainComponent from "./MainComponent";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GlobalProvider } from "./context/GlobalState";
 
 // import { useEffect } from "react";
 // import { account } from "./utils";
@@ -20,10 +21,10 @@ function App() {
   // }, []);
 
   return (
-    <>
+    <GlobalProvider>
       <ToastContainer />
       <MainComponent />
-    </>
+    </GlobalProvider>
   );
 }
 

@@ -1,6 +1,5 @@
 import React from "react";
 import SvgComponent from "../Components/mainSVGComponent";
-import CardComponent from "../Components/CardComponent";
 import Button from "@mui/material/Button";
 import { Box, Typography, createTheme, Stack } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";

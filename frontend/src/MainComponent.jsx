@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Appointments from "./Components/AppointmentsComponent/AppointmentsComponent";
 import Blogs from "./Components/BlogsComponent/BlogsComponent";
 import Doctors from "./Components/DoctorsComponent/DoctorsComponent";
@@ -11,8 +11,21 @@ import Sign from "./Pages/SignupComponent";
 import Dashboard from "./Pages/PatientDashboard";
 import Search from "./Pages/Search";
 import DashboardRouter from "./Pages/DashboardRouter";
+import { GlobalContext } from "./context/GlobalState";
 
 const MainComponent = () => {
+
+  const {loginUser} = useContext(GlobalContext)
+  useEffect(()=>{
+    const loginInfo = JSON.parse(sessionStorage.getItem('token'))
+    console.log(loginInfo)
+    if(loginInfo !== null){
+      loginUser(loginInfo)
+    }else{
+      window.location.href = "/"
+    }
+  },[])
+
   return (
     <>
       <Router>

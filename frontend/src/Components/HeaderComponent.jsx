@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
@@ -8,15 +8,25 @@ import Button from "@mui/material/Button";
 import { Avatar, createTheme, Menu, MenuItem, Stack, Box } from "@mui/material";
 import profileImg from "../assets/profile.jpg";
 import { ThemeProvider } from "@emotion/react";
+import { GlobalContext } from "../context/GlobalState";
 
-import { useDispatch, useSelector } from "react-redux";
-import { logout, login } from "../redux/actions/authAction";
+
+// import { logout, login } from "../redux/actions/authAction";
 
 const HeaderComponent = () => {
-  let isLogin = useSelector((state) => state.isLoggedIn);
-  const dispatch = useDispatch();
+
+
+
+  const { isLoggedIn, logoutUser }  = useContext(GlobalContext)
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    console.log(isLoggedIn)
+  },[isLoggedIn])
 
   const theme = createTheme({
     palette: {
@@ -36,9 +46,7 @@ const HeaderComponent = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    dispatch(logout);
-    dispatch(login({ token: null, isLoggedIn: false }));
+    logoutUser()
   };
 
   const MenuItemList = (items) => {
@@ -47,9 +55,10 @@ const HeaderComponent = () => {
         <Button
           key={idx}
           variant="text"
+          onClick={()=>navigate(item.url)}
           sx={{ color: "black", margin: "0 .5rem" }}
         >
-          {item}
+          {item.name}
         </Button>
       );
     });
@@ -127,13 +136,13 @@ const HeaderComponent = () => {
         </Link>
         <Toolbar sx={{ color: "black" }}>
           {MenuItemList([
-            "Home",
-            "Services",
-            "Doctors",
-            "Blogs",
-            "Appointments",
+            {name:"Home", url:'/'},
+            {name:"Dashboard", url:'/dashboard'},
+            {name:"About Us", url:'/about'},
+            {name:"Contact ", url:'/contact'},
+
           ])}
-          {isLogin === true ? ifLoginTrue() : ifLoginFalse()}
+          {isLoggedIn === true ? ifLoginTrue() : ifLoginFalse()}
         </Toolbar>
       </Toolbar>
     </AppBar>
