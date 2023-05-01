@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Router, Routes } from "react-router-dom";
 import DashboardSidepanel from "../Components/DashboardSidepanel";
-import PatientDashboard from "./PatientDashboard";
+import PatientDashboard from "./Patients/PatientDashboard";
 import { Stack } from "@mui/material";
-import PatientProfile from "./PatientProfile";
-import PatientPrescription from "./PatientPrescription";
-import PatientAppointments from "./PatientAppointments";
-import PatientCharts from "./PatientCharts";
+import PatientProfile from "./Patients/PatientProfile";
+import PatientPrescription from "./Patients/PatientPrescription";
+import PatientAppointments from "./Patients/PatientAppointments";
+import PatientCharts from "./Patients/PatientCharts";
 const DashboardRouter = () => {
   return (
       <Stack direction="row" className="bg-lightGrey">

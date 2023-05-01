@@ -47,6 +47,7 @@ const HeaderComponent = () => {
 
   const handleLogout = () => {
     logoutUser()
+    sessionStorage.clear();
   };
 
   const MenuItemList = (items) => {

@@ -6,11 +6,11 @@ const Doctor = require("../models/doctor");
 const bcrypt = require("bcrypt");
 
 exports.register = async (req, res) => {
-  let patient, hospital, pharmacy, doctor, laboratory;
+  let toregister;
 
   try {
     if (req.body.profession == "patient") {
-      patient = new Patient({
+      toregister = new Patient({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
@@ -25,7 +25,30 @@ exports.register = async (req, res) => {
       });
       var user = await Patient.findOne({ email: req.body.email });
     } else if (req.body.profession == "hospital") {
+      
     } else if (req.body.profession == "doctor") {
+      console.log(req.body)
+      toregister = new Doctor({
+        fullName: req.body.fullName,
+        gender: req.body.gender,
+        email: req.body.email,
+        password: req.body.password,
+        contactNumber: req.body.mobile,
+        profession: req.body.profession,
+        address: {
+          street: req.body['address.street'],
+          houseNumber: req.body['address.houseNumber'],
+          city: req.body['address.city'],
+          state: req.body['address.state'],
+        },
+        specialization: req.body.specialization,
+        yearsOfExperience: req.body.yearsOfExperience,
+        medicalLicenseNumber: req.body.medicalLicenseNumber,
+        licenseExpirationDate:req.body.licenseExpirationDate,
+        licenseIssuingAuthority: req.body.licenseIssuingAuthority,
+        qualifications: req.body.qualifications,
+      });
+      var user = await Patient.findOne({ email: req.body.email });
     } else if (req.body.profession == "laboratory") {
     } else if (req.body.profession == "pharmacy") {
     }
@@ -37,19 +60,19 @@ exports.register = async (req, res) => {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(patient.password, 10);
+    const hashedPassword = await bcrypt.hash(toregister.password, 10);
 
-    patient.password = hashedPassword;
-    console.log(patient, "hello");
-    await patient
+    toregister.password = hashedPassword;
+    console.log(toregister, "hello");
+    await toregister
       .save()
       .then(() =>
          res.status(201).json({
-          message: "Patient created",
+          message: "User created",
         })
       )
   } catch (error) {
-    // console.log('error')
+    console.log(error)
     res.status(400).json({
       message: error,
     });

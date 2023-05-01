@@ -86,7 +86,7 @@ const FormComponent = ({ fields, type }) => {
         .post(url, data)
         .then((res) => {
           console.log(res.data);
-          if (res.data.message === "Patient created") {
+          if (res.data.message === "User created") {
             showToast(
               "SignUp Successful, Please Login",
               "#23C552",

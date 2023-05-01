@@ -56,7 +56,6 @@ const doctor_field_list = [
   },
   { label: "Qualifications", name: "qualifications", type: "text" },
   { label: "Practice Name", name: "practiceName", type: "text" },
-  { label: "Practice Location", name: "practiceLocation", type: "text" },
   { label: "Years of Experience", name: "yearsOfExperience", type: "number" },
 ];
 

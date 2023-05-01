@@ -1,0 +1,21 @@
+{
+  "_id": "a07014f7-185d-478e-bdfe-2b83c34b184a",
+  "avatar": "https://loremflickr.com/800/800/girl",
+  "fullname": "Brittany Menon",
+  "email": "Brittany_Menon@gmail.com",
+  "gender": "female",
+  "password": "$2b$10$jc8oOkXzpSLuuGLAIF.cjes6YyEThc9dNHqlI2u86Cp/XHQw3xdb.",
+  "contactNumber": "641-203-9074",
+  "street": "Asan Dale",
+  "houseNumber": "61501",
+  "city": "Madhepura",
+  "state": "Delhi",
+  "pincode": "247 454",
+  "specialization": "Radiology",
+  "medicalLicenseNumber": "rb3ww751d7",
+  "licenseIssuingAuthority": "National Board of Examinations",
+  "licenseExpirationDate": "2027-10-16T06:30:19.411Z",
+  "qualification": "Others",
+  "clinicName": "Brittany's Clinic",
+  "yearsOfExperience": 37
+}

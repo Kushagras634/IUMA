@@ -14,23 +14,23 @@ const DashboardHeader = () => {
 
   const {name, isLoggedIn} = useContext(GlobalContext)
   const navigate = useNavigate()
-  useEffect(()=>{
-    if(!isLoggedIn){
-      navigate('/login')
-      toast("First Login", {
-        position: toast.POSITION.TOP_RIGHT,
-        autoClose: 2000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        style: {
-          backgroundColor: "#F84F31",
-          color: 'white',
-        },
-      });
-    }
-  })
+  // useEffect(()=>{
+  //   if(!isLoggedIn){
+  //     navigate('/login')
+  //     toast("First Login", {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //       autoClose: 2000,
+  //       hideProgressBar: true,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       style: {
+  //         backgroundColor: "#F84F31",
+  //         color: 'white',
+  //       },
+  //     });
+  //   }
+  // })
 
   return (
     <Stack
@@ -43,7 +43,7 @@ const DashboardHeader = () => {
     }}
   >
     <Typography variant="h4" color="initial">
-      Hello, {name.split(" ")[0]}
+      Hello, {name}
     </Typography>
     <Stack direction="column">
       <Avatar
