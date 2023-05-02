@@ -13,8 +13,7 @@ const DoctorSchema = new mongoose.Schema({
   licenseIssuingAuthority: { type: String },
   licenseExpirationDate: { type: Date },
   qualifications: { type: String },
-  practiceName: { type: String },
-  practiceLocation: { type: String },
+  clinicName: { type: String },
   yearsOfExperience: { type: Number },
   profession: {type: String, required: true},
 }, { collection: 'users' }  );

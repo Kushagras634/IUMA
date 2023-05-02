@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 // import TextField from "@mui/material/TextField";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
-import { login } from "../redux/actions/authAction";
+import { GlobalContext } from "../context/GlobalState";
 
 import {
   TextField,
@@ -41,7 +41,7 @@ const FormComponent = ({ fields, type }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const dispatch = useDispatch();
+  const { loginUser, logoutUser } = useContext(GlobalContext);
 
   const validate = () => {
     let tempErrors = {};
@@ -70,7 +70,7 @@ const FormComponent = ({ fields, type }) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!validate()) {
       return;
@@ -82,11 +82,11 @@ const FormComponent = ({ fields, type }) => {
       var data = formData;
       data["profession"] = type;
       console.log(data);
-      axios
+      await axios
         .post(url, data)
         .then((res) => {
           console.log(res.data);
-          if (res.data.message === "Patient created") {
+          if (res.data.message === "User created") {
             showToast(
               "SignUp Successful, Please Login",
               "#23C552",
@@ -100,31 +100,30 @@ const FormComponent = ({ fields, type }) => {
     } else if (location.pathname === "/login") {
       let url = "http://localhost:8000/auth/login";
       console.log(url);
-      axios
-        .post(url, formData)
-        .then((res) => {
-          console.log(res.data);
-          if (res.data.message === "Patient not found") {
-            showToast(
-              "Email do not exists, Please SignUp",
-              "#F84F31",
-              "white",
-              2000
-            );
-            // navigate("/signup");
-          } else if (res.data.message === "Invalid password") {
-            setErrors({ password: "Invalid Password" });
-          } else if (res.data.message === "Patient logged in successfully") {
-            localStorage.setItem("token", res.data.token);
-            dispatch(login({ token: res.data.token }));
-            showToast("Login Successful", "#23C552", "white", 2000);
-            navigate("/");
-          } else {
-            showToast("Error: Please try again", "#F84F31", "white", 2000);
-            navigate("/");
-          }
-        })
-        .catch((err) => console.log(err));
+      const { data } = await axios.post(url, formData);
+      console.log(data);
+      // loginUser(data);
+
+      if (data.message === "Patient not found") {
+        showToast(
+          "Email do not exists, Please SignUp",
+          "#F84F31",
+          "white",
+          2000
+        );
+        // navigate("/signup");
+      } else if (data.message === "Invalid password") {
+        setErrors({ password: "Invalid Password" });
+      } else if (data.message === "Login Successful") {
+        loginUser(data);
+        sessionStorage.setItem("token", JSON.stringify(data));
+
+        showToast("Login Successful", "#23C552", "white", 2000);
+        navigate("/dashboard");
+      } else {
+        showToast("Error: Please try again", "#F84F31", "white", 2000);
+        navigate("/");
+      }
     }
   };
 
