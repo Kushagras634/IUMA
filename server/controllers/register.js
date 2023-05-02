@@ -40,6 +40,7 @@ exports.register = async (req, res) => {
           houseNumber: req.body['address.houseNumber'],
           city: req.body['address.city'],
           state: req.body['address.state'],
+          pincode: req.body['address.pincode']
         },
         specialization: req.body.specialization,
         yearsOfExperience: req.body.yearsOfExperience,

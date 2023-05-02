@@ -26,6 +26,8 @@ const patient_field_list = [
   { label: "House Number", name: "houseNumber", type: "text" },
   { label: "City", name: "city", type: "text" },
   { label: "State", name: "state", type: "text" },
+  { label: "Pin Code", name: "address.pincode", type: "number" },
+
 ];
 
 const doctor_field_list = [
@@ -38,6 +40,7 @@ const doctor_field_list = [
   { label: "House Number", name: "address.houseNumber", type: "text" },
   { label: "City", name: "address.city", type: "text" },
   { label: "State", name: "address.state", type: "text" },
+  { label: "Pin Code", name: "address.pincode", type: "number" },
   { label: "Specialization", name: "specialization", type: "text" },
   {
     label: "Medical License Number",
@@ -69,6 +72,8 @@ const hospital_field_list = [
   { label: "House Number", name: "address.houseNumber", type: "text" },
   { label: "City", name: "address.city", type: "text" },
   { label: "State", name: "address.state", type: "text" },
+  { label: "Pin Code", name: "address.pincode", type: "number" },
+
   { label: "Registration Number", name: "registrationNumber", type: "text" },
   { label: "License Number", name: "licenseNumber", type: "text" },
   {
@@ -103,6 +108,8 @@ const pharmacy_field_list = [
   { label: "House Number", name: "address.houseNumber", type: "text" },
   { label: "City", name: "address.city", type: "text" },
   { label: "State", name: "address.state", type: "text" },
+  { label: "Pin Code", name: "address.pincode", type: "number" },
+
   { label: "Registration Number", name: "registrationNumber", type: "text" },
   { label: "License Number", name: "licenseNumber", type: "text" },
   {
@@ -126,6 +133,7 @@ const lab_field_list = [
   { label: "House Number", name: "address.houseNumber", type: "text" },
   { label: "City", name: "address.city", type: "text" },
   { label: "State", name: "address.state", type: "text" },
+  { label: "Pin Code", name: "address.pincode", type: "number" },
   { label: "Registration Number", name: "registrationNumber", type: "text" },
   { label: "License Number", name: "licenseNumber", type: "text" },
   {

@@ -17,7 +17,8 @@ exports.Login = async (req, res) => {
 
     // Check if password is correct
     if (!(await bcrypt.compare(password, user.password))) {
-      return res.status(400).send({
+      
+      return res.status(201).send({
         message: "Invalid password",
       });
     }

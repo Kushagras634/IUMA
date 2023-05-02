@@ -102,7 +102,7 @@ const FormComponent = ({ fields, type }) => {
       console.log(url);
       const { data } = await axios.post(url, formData);
       console.log(data);
-      loginUser(data);
+      // loginUser(data);
 
       if (data.message === "Patient not found") {
         showToast(
