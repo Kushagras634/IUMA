@@ -14,6 +14,9 @@ import DoctorPrescription from "./Doctors/DoctorPrescription";
 import DoctorAppointment from "./Doctors/DoctorAppointment";
 import DoctorHistory from "./Doctors/DoctorHistory";
 import DashboardHeader from "../Components/DashboardHeader";
+import PharmacyDashboard from "./Pharmacy/PharmacyDashboard";
+import PharmacyPrescription from "./Pharmacy/PharmacyPrescription";
+import Medicines from "./Pharmacy/Medicines";
 const DashboardRouter = () => {
   const { profession } = useContext(GlobalContext);
   const navigate = useNavigate();
@@ -40,7 +43,7 @@ const DashboardRouter = () => {
           </Routes>
         </Stack>
       );
-    case "doctor":
+    case "pharmacy":
       return (
         <Stack direction="row" className="bg-lightGrey">
           <DashboardSidepanel
@@ -106,24 +109,20 @@ const DashboardRouter = () => {
           </Routes>
         </Stack>
       );
-    case "pharmacy":
+    case "doctor":
       return (
         <Stack direction="row" className="bg-lightGrey">
           <DashboardSidepanel
             values={[
               { name: "Dashboard", url: "/dashboard/" },
-              { name: "Profile", url: "/dashboard/profile" },
               { name: "Prescription", url: "/dashboard/prescription" },
-              { name: "Appointments", url: "/dashboard/appointments" },
-              { name: "Search Doctor", url: "/search" },
+              { name: "Medicines", url: "/dashboard/medicines" },
             ]}
           />
           <Routes>
-            <Route exact path="/" element={<PatientDashboard />} />
-            <Route path="/profile" element={<PatientProfile />} />
-            <Route path="/prescription" element={<PatientPrescription />} />
-            <Route path="/appointments" element={<PatientAppointments />} />
-            <Route path="/charts" element={<PatientCharts />} />
+            <Route exact path="/" element={<PharmacyDashboard />} />
+            <Route path="/prescription" element={<PharmacyPrescription />} />
+            <Route path="/medicines" element={<Medicines />} />
           </Routes>
         </Stack>
       );
