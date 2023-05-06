@@ -35,9 +35,25 @@ const DoctorDashboard = () => {
             </div>
           </div>
         </div>
-        <div>
-          <h3>Profile</h3>
-          <img src="" alt="" />
+        <div className="shrink px-5">
+          <div className="border-solid border-2 w-fit border-white rounded-full">
+            {/* --------------- add image of a doctor-------------------- */}
+            <img className="object-fill" src="" alt="doctor pic" height={100} width={100} />
+          </div><br/>
+          <div>
+            {/* --------------- add name of a doctor from session or backend-------------------- */}
+            <p class="text-2xl font-semibold">Dr. Joshi</p>
+            {/*-------------------------Enter the email from the session or backend-----------------------*/}
+            <p>doctor@iuma.com</p>
+          </div><br />
+          <div className="flex space-x-2">
+            <div className="p-2 border-solid border w-fit border-slate-500 rounded-full">Emotional intelligence</div>
+            <div className="p-2 border-solid border w-fit border-slate-500 rounded-full">Attention to detail</div>
+            <div className="p-2 border-solid border w-fit border-slate-500 rounded-full">Professionalism</div>
+          </div><br />
+          <div className="max-w-lg">
+            <p>officia ea officia elit incididunt ipsum est sed amet ullamco ea enim laboris consequat enim irure elit commodo. exercitation qui laborum ut aliqua anim dolor enim adipiscing nisi anim consectetur reprehenderit voluptate laboris laborum ea commodo. ex lorem velit elit aliquip eiusmod deserunt ad Excepteur sit sed nisi ipsum occaecat id eiusmod aliquip. et adipiscing adipiscing ullamco amet dolor velit elit deserunt consequat sunt mollit velit aliqua ex sit sit. eiusmod ea consequat labore velit deserunt adipiscing ex ipsum id velit ipsum sed dolor labore anim aute.</p>
+            </div>
         </div>
       </div>
     </div>

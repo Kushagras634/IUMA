@@ -7,13 +7,13 @@ const Prescription = ({ patientDetails, doctorDetails, medicines, total }) => {
 
   return (
     <Paper sx={{ padding: '1rem', height: '100%'}}>
-      <h2>Patient Details</h2>
+      <h2 className='text-lg font-semibold'>Patient Details</h2>
       <p>
         Name: {patientDetails.name} <br />
         Age: {patientDetails.age} <br />
         Address: {patientDetails.address}
-      </p>
-      <h2>Doctor Details</h2>
+      </p><br/>
+      <h2 className='text-lg font-semibold'>Doctor Details</h2>
       <p>
         Name: {doctorDetails.name} <br />
         Registration Number: {doctorDetails.registrationNumber}
