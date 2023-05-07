@@ -21,6 +21,9 @@ import HospitalDashboard from "./Hospitals/HospitalDashboard";
 import HospitalStaff from "./Hospitals/HospitalStaff";
 import HospitalPrescription from "./Hospitals/HospitalPrescription"
 import HospitalPatientHistory from "./Hospitals/HospitalPatientHistory"
+import LabDashboard from "./Labs/LabDashboard";
+import LabRecords from "./Labs/LabRecords";
+import LabServices from "./Labs/LabServices";
 const DashboardRouter = () => {
   const { profession } = useContext(GlobalContext);
   const navigate = useNavigate();
@@ -47,7 +50,7 @@ const DashboardRouter = () => {
           </Routes>
         </Stack>
       );
-    case "hospital":
+    case "laboratory":
       return (
         <Stack direction="row" className="bg-lightGrey">
           <DashboardSidepanel
@@ -71,7 +74,7 @@ const DashboardRouter = () => {
           </Stack>
         </Stack>
       );
-    case "doctor":
+    case "hospital":
       return (
         <Stack direction="row" className="bg-lightGrey">
           <DashboardSidepanel
@@ -90,24 +93,20 @@ const DashboardRouter = () => {
           </Routes>
         </Stack>
       );
-    case "laboratory":
+    case "doctor":
       return (
         <Stack direction="row" className="bg-lightGrey">
           <DashboardSidepanel
             values={[
               { name: "Dashboard", url: "/dashboard/" },
-              { name: "Profile", url: "/dashboard/profile" },
-              { name: "Prescription", url: "/dashboard/prescription" },
-              { name: "Appointments", url: "/dashboard/appointments" },
-              { name: "Search Doctor", url: "/search" },
+              { name: "Records", url: "/dashboard/records" },
+              { name: "Services", url: "/dashboard/services" },
             ]}
           />
           <Routes>
-            <Route exact path="/" element={<PatientDashboard />} />
-            <Route path="/profile" element={<PatientProfile />} />
-            <Route path="/prescription" element={<PatientPrescription />} />
-            <Route path="/appointments" element={<PatientAppointments />} />
-            <Route path="/charts" element={<PatientCharts />} />
+            <Route exact path="/" element={<LabDashboard />} />
+            <Route path="/records" element={<LabRecords />} />
+            <Route path="/services" element={<LabServices />} />
           </Routes>
         </Stack>
       );
