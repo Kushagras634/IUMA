@@ -17,6 +17,10 @@ import DashboardHeader from "../Components/DashboardHeader";
 import PharmacyDashboard from "./Pharmacy/PharmacyDashboard";
 import PharmacyPrescription from "./Pharmacy/PharmacyPrescription";
 import Medicines from "./Pharmacy/Medicines";
+import HospitalDashboard from "./Hospitals/HospitalDashboard";
+import HospitalStaff from "./Hospitals/HospitalStaff";
+import HospitalPrescription from "./Hospitals/HospitalPrescription"
+import HospitalPatientHistory from "./Hospitals/HospitalPatientHistory"
 const DashboardRouter = () => {
   const { profession } = useContext(GlobalContext);
   const navigate = useNavigate();
@@ -43,7 +47,7 @@ const DashboardRouter = () => {
           </Routes>
         </Stack>
       );
-    case "pharmacy":
+    case "hospital":
       return (
         <Stack direction="row" className="bg-lightGrey">
           <DashboardSidepanel
@@ -67,24 +71,22 @@ const DashboardRouter = () => {
           </Stack>
         </Stack>
       );
-    case "hospital":
+    case "doctor":
       return (
         <Stack direction="row" className="bg-lightGrey">
           <DashboardSidepanel
             values={[
               { name: "Dashboard", url: "/dashboard/" },
-              { name: "Profile", url: "/dashboard/profile" },
+              { name: "staff", url: "/dashboard/staff" },
               { name: "Prescription", url: "/dashboard/prescription" },
-              { name: "Appointments", url: "/dashboard/appointments" },
-              { name: "Search Doctor", url: "/search" },
+              { name: "PatientHistory", url: "/dashboard/patientHistory" }
             ]}
           />
           <Routes>
-            <Route exact path="/" element={<PatientDashboard />} />
-            <Route path="/profile" element={<PatientProfile />} />
-            <Route path="/prescription" element={<PatientPrescription />} />
-            <Route path="/appointments" element={<PatientAppointments />} />
-            <Route path="/charts" element={<PatientCharts />} />
+            <Route exact path="/" element={<HospitalDashboard />} />
+            <Route path="/staff" element={<HospitalStaff />} />
+            <Route path="/prescription" element={<HospitalPrescription />} />
+            <Route path="/patientHistory" element={<HospitalPatientHistory />} />
           </Routes>
         </Stack>
       );
@@ -109,7 +111,7 @@ const DashboardRouter = () => {
           </Routes>
         </Stack>
       );
-    case "doctor":
+    case "pharmacy":
       return (
         <Stack direction="row" className="bg-lightGrey">
           <DashboardSidepanel

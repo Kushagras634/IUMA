@@ -5,7 +5,7 @@ const PharmacyPrescription = () => {
   return (
     <div className='ml-56 w-full'>
       <div className='pl-5'>
-        <Typography variant='h4'>Pharmacy</Typography>
+        <Typography variant='h4'>Prescription</Typography>
       </div>
       <div className='bg-white '>
         <Stack className="my-2  p-4 rounded">
