@@ -50,7 +50,7 @@ const DashboardRouter = () => {
           </Routes>
         </Stack>
       );
-    case "laboratory":
+    case "doctor":
       return (
         <Stack direction="row" className="bg-lightGrey">
           <DashboardSidepanel
@@ -93,7 +93,7 @@ const DashboardRouter = () => {
           </Routes>
         </Stack>
       );
-    case "doctor":
+    case "laboratory":
       return (
         <Stack direction="row" className="bg-lightGrey">
           <DashboardSidepanel

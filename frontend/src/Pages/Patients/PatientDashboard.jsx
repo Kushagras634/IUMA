@@ -11,14 +11,52 @@ import {
   List,
   ListItem,
   ListItemButton,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 
 import DownloadIcon from "@mui/icons-material/Download";
 import DataTable from "../../Components/DynamicTable";
 import Heart from "../../assets/heart.png";
 import DashboardHeader from "../../Components/DashboardHeader";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+const doctorSpecialties = [
+  "Cardiology",
+  "Dermatology",
+  "Endocrinology",
+  "Gastroenterology",
+  "Hematology",
+  "Neurology",
+  "Obstetrics and Gynecology",
+  "Oncology",
+  "Orthopedics",
+  "Pediatrics",
+  "Psychiatry",
+  "Radiology",
+  "Urology",
+];
 
 const PatientDashboard = () => {
+  const [appointmentInfo, setAppointmentInfo] = useState({
+    speciality: "",
+    location: "",
+  });
+  const navigate = useNavigate()
+  const handleAppointment = (e) => {
+    const { name, value } = e.target;
+    setAppointmentInfo({
+      ...appointmentInfo,
+      [name]: value,
+    });
+  };
+
+  const handleAppointmentBooking = async (e) => {
+    e.preventDefault();
+    navigate('/search', {state: appointmentInfo})
+  };
+
   return (
     <Stack direction="column" className="w-full p-4 flex-1 ml-56  ">
       <DashboardHeader />
@@ -26,32 +64,50 @@ const PatientDashboard = () => {
         {/* New Appointment  */}
         <Stack direction="column" width="70%">
           <Box className="bg-white p-3 my-4 rounded">
-            <Typography variant="h6" color="initial"  >
+            <Typography variant="h6" color="initial">
               New Appointment
             </Typography>
-            <Stack direction="row" gap={1}>
-              <FormControl className="mx-2 w-full">
-                <TextField
-                  name="Speciality"
-                  id="speciality"
-                  label="Speciality"
-                  type="text"
-                  fullWidth
-                />
-              </FormControl>
-              <FormControl className="mx-2 w-full">
-                <TextField
-                  name="Location"
-                  id="location"
-                  label="Location"
-                  type="text"
-                  fullWidth
-                />
-              </FormControl>
-              <Button variant="contained" className="self-center p-1 w-1/2 h-12" >
-                See Doctors
-              </Button>
-            </Stack>
+            <form action="" onSubmit={handleAppointmentBooking} method="post">
+              <Stack direction="row" gap={1}>
+                <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">
+                    Speciality
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    name="speciality"
+                    value={appointmentInfo.speciality}
+                    label="Age"
+                    onChange={handleAppointment}
+                  >
+                    {doctorSpecialties.map((ele, idx) => (
+                      <MenuItem key={idx} value={ele}>
+                        {ele}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl fullWidth>
+                  <TextField
+                    name="location"
+                    id="location"
+                    label="Location"
+                    value={appointmentInfo.location}
+                    onChange={handleAppointment}
+                    type="text"
+                    fullWidth
+                  />
+                </FormControl>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  className="self-center p-1 w-1/2 h-12"
+                >
+                  See Doctors
+                </Button>
+              </Stack>
+            </form>
           </Box>
           <Box
             sx={{
