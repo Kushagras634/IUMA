@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import HeaderComponent from "../Components/HeaderComponent";
 import { useLocation, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
@@ -39,6 +39,7 @@ const BookAppointment = () => {
   const [otp, setOtp] = useState("");
   const [qrValue, setQrValue] = useState("");
   const [docData, setDocData] = useState();
+  const divRef = useRef(null);
 
   const navigate = useNavigate()
   
@@ -73,7 +74,8 @@ const BookAppointment = () => {
       patientPhone:phone,
       status: 'booked'
     }
-    handleDownload();
+    // handleDownload();
+    handleExportPDF();
     let url = "http://localhost:8000/appointment/bookAppointment";
     await axios
       .post(url, data)
@@ -103,14 +105,22 @@ const BookAppointment = () => {
       pdf.save("download.pdf");
     });
   };
+  const handleExportPDF = () => {
+    html2canvas(divRef.current).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, "PNG", 0, 0);
+      pdf.save("div.pdf");
+    });
+  };
 
   return (
     <>
       <HeaderComponent />
       <main className="flex justify-evenly items-center gap-4  " id="bookingForm" >
-        <form onSubmit={handleSubmit} className="">
+        <form onSubmit={handleSubmit} className="" >
           <h2 className="text-2xl mb-4">Book an Appointment</h2>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3" ref={divRef}>
             <div className="mb-4">
               <label
                 className="block text-gray-700 font-bold mb-2"

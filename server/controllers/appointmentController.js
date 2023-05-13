@@ -27,15 +27,11 @@ exports.SearchDoctors = async (req, res) => {
   //   return res.status(200).json({ error: "Missing search query" });
   // }
   try {
-    const doctors = await conn
-      .collection("users")
-      .find({
-        $and: [
-          { specialization: { $eq: speciality } },
-          { practiceLocation: new RegExp(location, "i") },
-        ],
-      })
-      .toArray();
+    let query = { specialization: { $eq: speciality } };
+    if (location) {
+      query.practiceLocation = new RegExp(location, "i");
+    }
+    const doctors = await conn.collection("users").find(query).toArray();
     res.json(doctors);
   } catch (error) {
     console.log(error);

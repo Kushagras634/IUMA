@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 function DataTable({ title, data }) {
+  console.log(title,)
   const headers = Object.keys(data[0]);
 
   return (

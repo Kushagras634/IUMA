@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // import CustomTable from "../../Components/TableComponent";
 // import profile from "../assets/profile.jpg";
 import {
@@ -22,6 +22,7 @@ import Heart from "../../assets/heart.png";
 import DashboardHeader from "../../Components/DashboardHeader";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { GlobalContext } from "../../context/GlobalState";
 const doctorSpecialties = [
   "Cardiology",
   "Dermatology",
@@ -43,7 +44,7 @@ const PatientDashboard = () => {
     speciality: "",
     location: "",
   });
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleAppointment = (e) => {
     const { name, value } = e.target;
     setAppointmentInfo({
@@ -51,11 +52,40 @@ const PatientDashboard = () => {
       [name]: value,
     });
   };
+  const [testResults, setTestResults] = useState(null);
+  const { email } = useContext(GlobalContext);
 
   const handleAppointmentBooking = async (e) => {
     e.preventDefault();
-    navigate('/search', {state: appointmentInfo})
+    navigate("/search", { state: appointmentInfo });
   };
+
+  useEffect(() => {
+    const handleCall = async () => {
+      let url = "http://localhost:8000/patient/getLab";
+      console.log(url);
+      const { data } = await axios.post(url, { email });
+      if (data.message === "Email not found") {
+        console.log("login error");
+        return;
+      }
+      console.log(data.tests);
+
+      console.log(typeof data.tests);
+      if (data.tests.length > 0) {
+        const testRe=Object.entries(data.tests[0]); // access the first object in the array
+        console.log(testRe);
+        console.log(typeof testRe);
+        setTestResults(testRe)
+        // use the testResults object as required
+      }
+      // console.log("Before setTestResults:", testResults);
+      // setTestResults(data);
+      // console.log("After setTestResults:", testResults);
+    };
+    handleCall();
+    console.log(testResults)
+  }, []);
 
   return (
     <Stack direction="column" className="w-full p-4 flex-1 ml-56  ">

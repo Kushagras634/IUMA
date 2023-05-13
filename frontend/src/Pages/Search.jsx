@@ -190,7 +190,7 @@ const Search = () => {
                     <CardComponent
                       key={id}
                       docId = {doc._id}
-                      title={doc.fullName}
+                      title={doc.fullName || doc.name}
                       img={doc.gender === "Male" ? docMale : docFemale}
                       cardWidth="200px"
                       imgWidth="200px"
