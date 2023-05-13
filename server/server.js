@@ -27,10 +27,11 @@ const conn = require("./db/conn");
 
 const bodyParser = require("body-parser");
 
-const patientRoutes = require("./routes/paitents");
+// const patientRoutes = require("./routes/paitents");
 const loginRoute = require("./routes/login");
 const miscellaneousRoute = require("./routes/miscellaneous");
-
+const appointmentRoute = require('./routes/appointments')
+const patientRoutes = require('./routes/patient')
 conn.on("error", (error) => {
   console.log(`MongoDB connection error: ${error}`);
 });
@@ -43,9 +44,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // your routes goes here
-app.use("/patient", patientRoutes);
+// app.use("/patient", patientRoutes);
 app.use("/auth", loginRoute);
 app.use("/miscellaneous", miscellaneousRoute);
+app.use("/appointment", appointmentRoute)
+app.use("/patient", patientRoutes)
+
 
 app.use(express.static("build"));
 

@@ -17,7 +17,7 @@ const PatientPrescription = () => {
       <Stack direction={`row`}>
         <Stack
           direction={`column`}
-          className="w-1/3 bg-white my-2  p-4 rounded  "
+          className="w-1/3 bg-white my-2  p-4 rounded"
         >
           <Typography variant="h5" color="initial" className="mb-4">
             Files / Documents

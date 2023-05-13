@@ -5,18 +5,32 @@ import {
   Typography,
   CardActionArea,
 } from "@mui/material";
-import cardImage from "../assets/2213424.webp"
+import cardImage from "../assets/2213424.webp";
+import { useNavigate } from "react-router-dom";
 
-const handleLink = (item) => {
-    window.location.href = item;
+const CardComponent = ({
+  img,
+  title,
+  cardWidth,
+  imgWidth,
+  imgHeight,
+  link,
+  margin,
+  docId,
+}) => {
+  const navigate = useNavigate();
+
+  const handleLink = () => {
+    if (link!="#") {
+      navigate(link, { state: { id: docId } });
+    }
   };
 
-const CardComponent = ({ img, title, cardWidth, imgWidth, imgHeight, link, margin }) => {
   return (
     <Card sx={{ maxWidth: cardWidth, cursor: "pointer", margin: margin }}>
-      <CardActionArea onClick={() => handleLink(link)}>
+      <CardActionArea onClick={handleLink}>
         <CardMedia
-          image={img !== ""? img : cardImage}
+          image={img !== "" ? img : cardImage}
           title={title}
           sx={{ height: imgHeight, width: imgWidth }}
         />

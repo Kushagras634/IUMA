@@ -12,6 +12,7 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid"; // Import uuid library
 import SearchDropDown from "../Components/SearchDowpdown";
 import HeaderComponent from "../Components/HeaderComponent";
+import { useLocation } from "react-router-dom";
 
 const doctorSpecialties = [
   "Cardiology",
@@ -34,6 +35,15 @@ const Search = () => {
   const [searchCity, setSearchCity] = useState("");
   const [searchSpeciality, setSearchSpeciality] = useState("");
   const [cities, setCities] = useState([]);
+  const [doctors, setDoctors] = useState([])
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state) {
+      // setSearchQuery(location.state);
+      handleAppointmentBooking("location");
+    }
+  }, []);
 
   useEffect(() => {
     const url = "http://localhost:8000/miscellaneous/city";
@@ -53,9 +63,25 @@ const Search = () => {
     setSearchQuery(e.target.value);
   };
 
+  const handleAppointmentBooking = async (e) => {
+    if (e !== "location") {
+      e.preventDefault();
+    }
+
+    let url = "http://localhost:8000/appointment/searchDoc";
+    console.log(location.state);
+    const { data } = await axios.post(url, e==="location"?location.state:searchQuery);
+    console.log(data);
+    // loginUser(data);
+    setDoctors(data);
+    // if (data.message === "Patient not found") {
+    //   showToast("Email do not exists, Please SignUp", "#F84F31", "white", 2000);
+    // }
+  };
+
   return (
     <>
-    <HeaderComponent/>
+      <HeaderComponent />
       <Stack sx={{ margin: "1rem 3rem" }}>
         <Stack
           sx={{
@@ -125,7 +151,7 @@ const Search = () => {
               margin: "2rem",
             }}
           >
-            {searchQuery !== ""
+            {/* {1 == 0
               ? doctor
                   .filter((doc) =>
                     doc.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -157,7 +183,23 @@ const Search = () => {
                       margin=".4rem"
                     />
                   );
-                })}
+                })} */}
+
+                {
+                  doctors.map((doc, id)=>(
+                    <CardComponent
+                      key={id}
+                      docId = {doc._id}
+                      title={doc.fullName || doc.name}
+                      img={doc.gender === "Male" ? docMale : docFemale}
+                      cardWidth="200px"
+                      imgWidth="200px"
+                      imgHeight="200px"
+                      link={"/bookAppointment"}
+                      margin=".4rem"
+                    />
+                  ))
+                }
           </Box>
         </Stack>
       </Stack>

@@ -23,6 +23,9 @@ html, body, .root{
   --bodyLarge: 16px;
   --bodyMedium: 14px;
   --bodySmall: 12px;
+  /* --fc-border-color: black; */
+  --fc-daygrid-event-dot-width: 5px;
+  --fc-page-bg-color: #fff;
 
   --primaryColor:#2EC5BC;
   --buttonColor: #27305E;

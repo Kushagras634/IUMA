@@ -8,10 +8,10 @@ import Home from "./Pages/HomeComponent";
 import Services from "./Components/ServicesComponent/ServicesComponent";
 import Login from "./Pages/LoginComponent";
 import Sign from "./Pages/SignupComponent";
-import Dashboard from "./Pages/Patients/PatientDashboard";
 import Search from "./Pages/Search";
 import DashboardRouter from "./Pages/DashboardRouter";
 import { GlobalContext } from "./context/GlobalState";
+import  BookAppointment  from "./Pages/BookAppointment";
 
 const MainComponent = () => {
 
@@ -38,6 +38,7 @@ const MainComponent = () => {
           <Route path="/signup" element={<Sign />} />
           <Route path="/dashboard/*" element={<DashboardRouter />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/bookAppointment" element={<BookAppointment/>} />
         </Routes>
       </Router>
     </>
