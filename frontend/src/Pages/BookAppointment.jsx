@@ -74,8 +74,9 @@ const BookAppointment = () => {
       patientPhone:phone,
       status: 'booked'
     }
+    // console.log(data)
     // handleDownload();
-    handleExportPDF();
+    handleExportPDF(data);
     let url = "http://localhost:8000/appointment/bookAppointment";
     await axios
       .post(url, data)
@@ -100,18 +101,34 @@ const BookAppointment = () => {
     const input = document.getElementById("root");
     html2canvas(input).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
+      canvas.width = document.body.clientWidth
       const pdf = new jsPDF();
       pdf.addImage(imgData, "JPEG", 0, 0);
       pdf.save("download.pdf");
     });
   };
-  const handleExportPDF = () => {
-    html2canvas(divRef.current).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
+  const handleExportPDF = (data) => {
+    // html2canvas(divRef.current).then((canvas) => {
+    //   const imgData = canvas.toDataURL("image/png");
+    //   const pdf = new jsPDF();
+    //   pdf.addImage(imgData, "PNG", 0, 0);
+    //   pdf.save("div.pdf");
+    // });
+    console.log(data);
       const pdf = new jsPDF();
-      pdf.addImage(imgData, "PNG", 0, 0);
-      pdf.save("div.pdf");
-    });
+      pdf.text('Appointment Details', 70,20);
+      pdf.setFontSize(14);
+      pdf.text('Name: ', 20, 40);
+      pdf.text(data.patientName, 60,40);
+      pdf.text('Phone No.: ', 20, 60);
+      pdf.text(data.patientPhone, 60, 60);
+      pdf.text('Time: ', 20, 80);
+      pdf.text(data.time, 60,80);
+      pdf.text('Date: ', 20, 100);
+      pdf.text(data.date, 60,100);
+      pdf.text('Doctor ID: ', 20,120);
+      pdf.text(data.doctorId, 60, 120);
+      pdf.save("appointment.pdf");
   };
 
   return (

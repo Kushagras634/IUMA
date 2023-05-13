@@ -24,7 +24,7 @@ const DoctorDashboard = () => {
   }, []);
 
   return (
-    <div className="conatiner my-2 w-full">
+    <div className="w-full my-2 conatiner">
       <div className="flex">
         <div className="bg-white w-1/3 max-h-[85vh] bg-scroll overflow-y-auto scroll-smooth">
           <h2 className="p-2">Todays Appointments</h2>
