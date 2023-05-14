@@ -7,28 +7,28 @@ const PrescriptionForm = () => {
         <td>1</td>
         <td>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="text"
             name="medicine_name"
           />
         </td>
         <td>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="text"
             name="strength"
           />
         </td>
         <td>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="text"
             name="dosage"
           />
         </td>
         <td>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="text"
             name="dose"
           />
@@ -36,14 +36,14 @@ const PrescriptionForm = () => {
 
         <td>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="text"
             name="frequency"
           />
         </td>
         <td>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="text"
             name="duration"
           />
@@ -65,6 +65,7 @@ const PrescriptionForm = () => {
   const [prescription, setPrescription] = useState({});
 
   const handleChange = (e) => {
+    // console.log("hello");
     const { name, value } = e.target;
     setPrescription({ ...prescription, [name]: value });
   };
@@ -77,15 +78,16 @@ const PrescriptionForm = () => {
   const addRow = () => {};
 
   return (
-    <div className="container flex-col bg-white rounded-md my-2 p-2 ">
+    <div className="container flex-col p-2 my-2 bg-white rounded-md ">
       <h5 className="text-lg font-semibold">Prescription Form</h5>
+      <form>
       <div className="flex justify-between ">
         <div class="w-full m-2">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block mb-2 text-sm font-bold text-gray-700">
             Patient's Name
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="text"
             name="name"
             value={prescription.name || ""}
@@ -94,11 +96,11 @@ const PrescriptionForm = () => {
           />
         </div>
         <div class="w-full m-2">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block mb-2 text-sm font-bold text-gray-700">
             Date of Birth
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="date"
             name="dob"
             value={prescription.dob || ""}
@@ -107,11 +109,11 @@ const PrescriptionForm = () => {
           />
         </div>
         <div class="w-full m-2">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block mb-2 text-sm font-bold text-gray-700">
             Prescription Date
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="date"
             name="prescriptionDate"
             value={prescription.prescriptionDate || ""}
@@ -122,11 +124,11 @@ const PrescriptionForm = () => {
       </div>
       <div className="flex justify-between ">
         <div class="w-full m-2">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block mb-2 text-sm font-bold text-gray-700">
             BMI
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="number"
             name="bmi"
             value={prescription.bmi || ""}
@@ -135,11 +137,11 @@ const PrescriptionForm = () => {
           />
         </div>
         <div class="w-full m-2">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block mb-2 text-sm font-bold text-gray-700">
             Temperature
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="number"
             name="temperature"
             value={prescription.temperature || ""}
@@ -148,11 +150,11 @@ const PrescriptionForm = () => {
           />
         </div>
         <div class="w-full m-2">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
+          <label className="block mb-2 text-sm font-bold text-gray-700">
             Blood Pressure
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
             type="number"
             name="bp"
             value={prescription.bp || ""}
@@ -162,13 +164,13 @@ const PrescriptionForm = () => {
         </div>
       </div>
       <div className="container flex-col m-2">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
+        <label className="block mb-2 text-sm font-bold text-gray-700">
           Diagnosis
         </label>
         <textarea
           rows={10}
           cols={30}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
           name="diagnosis"
           value={prescription.diagnosis || ""}
             onChange={handleChange}
@@ -177,7 +179,7 @@ const PrescriptionForm = () => {
       </div>
       <table className="table">
         <thead>
-          <tr className="uppercase text-gray-600 font-normal text-base text-left ">
+          <tr className="text-base font-normal text-left text-gray-600 uppercase ">
             <th className="px-4 py-2">#</th>
             <th className="px-4 py-2">Medicine Name</th>
             <th className="px-4 py-2">
@@ -204,51 +206,63 @@ const PrescriptionForm = () => {
             <td>1</td>
             <td>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                 type="text"
                 name="medicine_name"
+                  onChange={handleChange}
+                  value={prescription.medicine_name || ""}
               />
             </td>
             <td>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                 type="text"
                 name="strength"
+                  value={prescription.strength || ""}
+                  onChange={handleChange}
               />
             </td>
             <td>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                 type="text"
                 name="dosage"
+                  value={prescription.dosage || ""}
+                  onChange={handleChange}
               />
             </td>
             <td>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                 type="text"
                 name="dose"
+                  value={prescription.dose || ""}
+                  onChange={handleChange}
               />
             </td>
 
             <td>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                 type="text"
                 name="frequency"
+                  value={prescription.frequency || ""}
+                  onChange={handleChange}
               />
             </td>
             <td>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                 type="text"
                 name="duration"
+                  value={prescription.duration || ""}
+                  onChange={handleChange}
               />
             </td>
             <td>
               <button
                 onClick={addRow}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
               >
                 Add
               </button>
@@ -257,13 +271,13 @@ const PrescriptionForm = () => {
         </tbody>
       </table>
       <div className="container flex-col m-2">
-        <label className="block text-gray-700 text-sm font-bold mb-2">
-          Special Instrruction
+        <label className="block mb-2 text-sm font-bold text-gray-700">
+          Special Instruction
         </label>
         <textarea
           rows={5}
           cols={30}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
           name="instructions"
           placeholder="Enter any Special Instruction"
         />
@@ -271,17 +285,19 @@ const PrescriptionForm = () => {
       <div>
         <button
           type="submit"
-          className="m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="px-4 py-2 m-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+          onClick={handleSubmit}
         >
           Submit
         </button>
         <button
           type="reset"
-          className="m-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="px-4 py-2 m-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
         >
           Reset
         </button>
       </div>
+    </form>
     </div>
   );
 };
