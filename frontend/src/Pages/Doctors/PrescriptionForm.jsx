@@ -1,68 +1,73 @@
 import React, { useState } from "react";
 
 const PrescriptionForm = () => {
-  const tableRow = () => {
-    return (
-      <tr>
-        <td>1</td>
-        <td>
-          <input
-            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-            type="text"
-            name="medicine_name"
-          />
-        </td>
-        <td>
-          <input
-            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-            type="text"
-            name="strength"
-          />
-        </td>
-        <td>
-          <input
-            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-            type="text"
-            name="dosage"
-          />
-        </td>
-        <td>
-          <input
-            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-            type="text"
-            name="dose"
-          />
-        </td>
+  // const tableRow = () => {
+  //   return (
+  //     <tr>
+  //       <td>1</td>
+  //       <td>
+  //         <input
+  //           className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+  //           type="text"
+  //           name="medicine_name"
+  //         />
+  //       </td>
+  //       <td>
+  //         <input
+  //           className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+  //           type="text"
+  //           name="strength"
+  //         />
+  //       </td>
+  //       <td>
+  //         <input
+  //           className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+  //           type="text"
+  //           name="dosage"
+  //         />
+  //       </td>
+  //       <td>
+  //         <input
+  //           className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+  //           type="text"
+  //           name="dose"
+  //         />
+  //       </td>
 
-        <td>
-          <input
-            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-            type="text"
-            name="frequency"
-          />
-        </td>
-        <td>
-          <input
-            className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-            type="text"
-            name="duration"
-          />
-        </td>
-        <td>
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Add
-          </button>
-        </td>
-        <td>
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Remove
-          </button>
-        </td>
-      </tr>
-    );
-  };
+  //       <td>
+  //         <input
+  //           className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+  //           type="text"
+  //           name="frequency"
+  //         />
+  //       </td>
+  //       <td>
+  //         <input
+  //           className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+  //           type="text"
+  //           name="duration"
+  //         />
+  //       </td>
+  //       <td>
+  //         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  //           Add
+  //         </button>
+  //       </td>
+  //       <td>
+  //         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  //           Remove
+  //         </button>
+  //       </td>
+  //     </tr>
+  //   );
+  // };
 
-  const [prescription, setPrescription] = useState({});
+  const [prescription, setPrescription] = useState({
+    tableData: [
+      { id: 1, medicine_name: "", strength: "", dosage: "", dose: "", frequency: "", duration: ""}
+    ]
+  });
+  const [data, setData] = useState(prescription.tableData);
 
   const handleChange = (e) => {
     // console.log("hello");
@@ -70,17 +75,25 @@ const PrescriptionForm = () => {
     setPrescription({ ...prescription, [name]: value });
   };
 
+  const handleMediChange = (e) => {
+    // console.log("hello");
+    const { name, value } = e.target;
+    data[data.length-1][name] = value;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log(prescription)
   }
 
-  const addRow = () => {};
+  const addRow = () => {
+    const newRow = { id: 1, medicine_name: "", strength: "", dosage: "", dose: "", frequency: "", duration: "" };
+    setData([...data, newRow]);
+  };
 
   return (
     <div className="container flex-col p-2 my-2 bg-white rounded-md ">
       <h5 className="text-lg font-semibold">Prescription Form</h5>
-      <form>
       <div className="flex justify-between ">
         <div class="w-full m-2">
           <label className="block mb-2 text-sm font-bold text-gray-700">
@@ -198,67 +211,68 @@ const PrescriptionForm = () => {
               Duration <br /> (For 10 days)
             </th>
             <th className="px-4 py-2">Add</th>
-            <th className="px-4 py-2">Remove</th>
+            {/* <th className="px-4 py-2">Remove</th> */}
           </tr>
         </thead>
         <tbody>
-          <tr className="m-2">
-            <td>1</td>
-            <td>
-              <input
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                type="text"
-                name="medicine_name"
-                  onChange={handleChange}
-                  value={prescription.medicine_name || ""}
-              />
-            </td>
-            <td>
-              <input
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                type="text"
-                name="strength"
-                  value={prescription.strength || ""}
-                  onChange={handleChange}
-              />
-            </td>
-            <td>
-              <input
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                type="text"
-                name="dosage"
-                  value={prescription.dosage || ""}
-                  onChange={handleChange}
-              />
-            </td>
-            <td>
-              <input
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                type="text"
-                name="dose"
-                  value={prescription.dose || ""}
-                  onChange={handleChange}
-              />
-            </td>
-
-            <td>
-              <input
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                type="text"
-                name="frequency"
-                  value={prescription.frequency || ""}
-                  onChange={handleChange}
-              />
-            </td>
-            <td>
-              <input
-                className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                type="text"
-                name="duration"
-                  value={prescription.duration || ""}
-                  onChange={handleChange}
-              />
-            </td>
+            {data.map((row) => (
+              <tr className="m-2">
+                <td>{row.id}</td>
+                <td><input
+                  className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                  type="text"
+                  name="medicine_name"
+                  onChange={handleMediChange}
+                  // value={row.medicine_name || ""}
+                /></td>
+                <td>
+                  <input
+                    className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="strength"
+                    // value={row.strength || ""}
+                    onChange={handleMediChange}
+                  />
+                </td>
+                <td>
+                  <input
+                    className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="dosage"
+                    // value={row.dosage || ""}
+                    onChange={handleMediChange}
+                  />
+                </td>
+                <td>
+                  <input
+                    className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="dose"
+                    // value={row.dose || ""}
+                    onChange={handleMediChange}
+                  />
+                </td>
+                <td>
+                  <input
+                    className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="frequency"
+                    // value={row.frequency || ""}
+                    onChange={handleMediChange}
+                  />
+                </td>
+                <td>
+                  <input
+                    className="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="duration"
+                    // value={row.duration || ""}
+                    onChange={handleMediChange}
+                  />
+                </td>
+              </tr>
+            ))}
+          <tr>
             <td>
               <button
                 onClick={addRow}
@@ -297,7 +311,6 @@ const PrescriptionForm = () => {
           Reset
         </button>
       </div>
-    </form>
     </div>
   );
 };
