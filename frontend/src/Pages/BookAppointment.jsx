@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, useRef } from "react";
 import HeaderComponent from "../Components/HeaderComponent";
 import { useLocation, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalState";
-import QRCode from "qrcode.react";
+// import QRCode from "qrcode.react";
 import { v4 as uuidv4 } from "uuid";
 import docMale from "../assets/doc_male.jpg";
 import docFemale from "../assets/doc_female.avif";
@@ -11,6 +11,7 @@ import axios from "axios";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { toast } from "react-toastify";
+import QRCode from "qrcode";
 
 function showToast(message, color, textColor, duration) {
   toast(message, {
@@ -27,7 +28,6 @@ function showToast(message, color, textColor, duration) {
   });
 }
 
-
 const BookAppointment = () => {
   const { email } = useContext(GlobalContext);
 
@@ -40,9 +40,8 @@ const BookAppointment = () => {
   const [qrValue, setQrValue] = useState("");
   const [docData, setDocData] = useState();
   const divRef = useRef(null);
-
-  const navigate = useNavigate()
-  
+  const [qr, setQr] = useState("")
+  const navigate = useNavigate();
 
   useEffect(() => {
     // console.log(location)
@@ -58,8 +57,23 @@ const BookAppointment = () => {
     }
     const newOtp = Math.floor(10000000 + Math.random() * 90000000).toString();
     const newQrValue = uuidv4();
-    setQrValue(newQrValue);
     setOtp(newOtp);
+    // console.log(newQrValue)
+    setQr(newQrValue)
+
+    QRCode.toDataURL(
+      newQrValue,
+      {
+        width: 200,
+        margin: 2,
+      },
+      (err, newQrValue) => {
+        if (err) return console.log(err);
+
+        console.log(newQrValue);
+        setQrValue(newQrValue);
+      }
+    );
   }, []);
 
   const handleSubmit = async (e) => {
@@ -70,72 +84,62 @@ const BookAppointment = () => {
       doctorId: docData._id,
       date: date,
       time: time,
-      patientName:name, 
-      patientPhone:phone,
-      status: 'booked'
-    }
+      patientName: name,
+      patientPhone: phone,
+      qr: qr,
+      otp: otp,
+      status: "booked",
+    };
     // console.log(data)
     // handleDownload();
-    handleExportPDF(data);
+    handleExportPDF();
     let url = "http://localhost:8000/appointment/bookAppointment";
     await axios
       .post(url, data)
       .then((res) => {
         console.log(res.data);
         if (res.data === "Appointment Booked") {
-          showToast(
-            "Appointment Booked Successfull",
-            "#23C552",
-            "white",
-            2000
-          );
+          showToast("Appointment Booked Successfull", "#23C552", "white", 2000);
           navigate("/dashboard");
         }
       })
       .catch((err) => console.log(err));
-
-
   };
 
-  const handleDownload = () => {
-    const input = document.getElementById("root");
-    html2canvas(input).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      canvas.width = document.body.clientWidth
+  const handleExportPDF = async () => {
+    try {
       const pdf = new jsPDF();
-      pdf.addImage(imgData, "JPEG", 0, 0);
-      pdf.save("download.pdf");
-    });
-  };
-  const handleExportPDF = (data) => {
-    // html2canvas(divRef.current).then((canvas) => {
-    //   const imgData = canvas.toDataURL("image/png");
-    //   const pdf = new jsPDF();
-    //   pdf.addImage(imgData, "PNG", 0, 0);
-    //   pdf.save("div.pdf");
-    // });
-    console.log(data);
-      const pdf = new jsPDF();
-      pdf.text('Appointment Details', 70,20);
+      pdf.text("Appointment Details", 70, 20);
       pdf.setFontSize(14);
-      pdf.text('Name: ', 20, 40);
-      pdf.text(data.patientName, 60,40);
-      pdf.text('Phone No.: ', 20, 60);
-      pdf.text(data.patientPhone, 60, 60);
-      pdf.text('Time: ', 20, 80);
-      pdf.text(data.time, 60,80);
-      pdf.text('Date: ', 20, 100);
-      pdf.text(data.date, 60,100);
-      pdf.text('Doctor ID: ', 20,120);
-      pdf.text(data.doctorId, 60, 120);
+      pdf.text("Name: ", 20, 40);
+      pdf.text(name, 60, 40);
+      pdf.text("Phone No.: ", 20, 60);
+      pdf.text(phone, 60, 60);
+      pdf.text("Time: ", 20, 80);
+      pdf.text(time, 60, 80);
+      pdf.text("Date: ", 20, 100);
+      pdf.text(date, 60, 100);
+      pdf.text("Doctor ID: ", 20, 120);
+      pdf.text(docData._id, 60, 120);
+      pdf.text("OTP: ", 20, 140);
+      pdf.text(otp, 60, 140);
+      pdf.text("QR: ", 20, 160);
+      pdf.addImage(qrValue, "PNG", 20, 160, 50, 50);
+
       pdf.save("appointment.pdf");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
       <HeaderComponent />
-      <main className="flex justify-evenly items-center gap-4  " id="bookingForm" >
-        <form onSubmit={handleSubmit} className="" >
+      <main
+        className="flex justify-evenly items-center gap-4  "
+        id="bookingForm"
+      >
+        <form onSubmit={handleSubmit} className="">
           <h2 className="text-2xl mb-4">Book an Appointment</h2>
           <div className="grid grid-cols-2 gap-3" ref={divRef}>
             <div className="mb-4">
@@ -200,7 +204,11 @@ const BookAppointment = () => {
             </div>
           </div>
           <div className="flex justify-between w-full">
-            {qrValue && <QRCode value={qrValue} />}
+            {qrValue && (
+              <>
+                <img src={qrValue} alt="" />
+              </>
+            )}
             <div className="w-1/2">
               <p>Otp</p>
               <p className="text-xl font-bold">{otp}</p>
@@ -214,7 +222,6 @@ const BookAppointment = () => {
             >
               Book Appointment
             </button>
-            
           </div>
         </form>
         {docData && (
@@ -240,7 +247,6 @@ const BookAppointment = () => {
                   <p> Licence Issued By : {docData.licenseIssuingAuthority} </p>
                   <p>Address : {docData.practiceLocation}</p>
                 </div>
-                
               </div>
             </div>
           </div>

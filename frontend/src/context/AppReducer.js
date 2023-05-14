@@ -7,6 +7,7 @@ export default (state, action) => {
       return {
         token: action.payload.token,
         email: action.payload.email,
+        id: action.payload.id,
         profession: action.payload.profession,
         name: action.payload.name,
         isLoggedIn: true,
@@ -15,6 +16,7 @@ export default (state, action) => {
       return {
         token: null,
         email: null,
+        id:null,
         profession: null,
         name:null,
         isLoggedIn: false,

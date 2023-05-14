@@ -9,7 +9,6 @@ import PatientAppointments from "./Patients/PatientAppointments";
 import PatientCharts from "./Patients/PatientCharts";
 import { GlobalContext } from "../context/GlobalState";
 import DoctorDashboard from "./Doctors/DoctorDashboard";
-import DoctorProfile from "./Doctors/DoctorProfile";
 import DoctorPrescription from "./Doctors/DoctorPrescription";
 import DoctorAppointment from "./Doctors/DoctorAppointment";
 import DoctorHistory from "./Doctors/DoctorHistory";
@@ -24,6 +23,8 @@ import HospitalPatientHistory from "./Hospitals/HospitalPatientHistory"
 import LabDashboard from "./Labs/LabDashboard";
 import LabRecords from "./Labs/LabRecords";
 import LabServices from "./Labs/LabServices";
+import VerifyPatient from "./Doctors/VerifyPatient";
+import PrescriptionForm from "./Doctors/PrescriptionForm";
 const DashboardRouter = () => {
   const { profession } = useContext(GlobalContext);
   const navigate = useNavigate();
@@ -56,7 +57,6 @@ const DashboardRouter = () => {
           <DashboardSidepanel
             values={[
               { name: "Dashboard", url: "/dashboard/" },
-              { name: "Profile", url: "/dashboard/profile" },
               { name: "Prescriptions", url: "/dashboard/prescription" },
               { name: "Appointments", url: "/dashboard/appointments" },
               { name: "History", url: "/dashboard/history" },
@@ -66,10 +66,12 @@ const DashboardRouter = () => {
             <DashboardHeader />
             <Routes>
               <Route exact path="/" element={<DoctorDashboard />} />
-              <Route path="/profile" element={<DoctorProfile />} />
               <Route path="/prescription" element={<DoctorPrescription />} />
               <Route path="/appointments" element={<DoctorAppointment />} />
               <Route path="/history" element={<DoctorHistory />} />
+              <Route path="/verifyPatient" element={<VerifyPatient/>} />
+              <Route path="/prescriptionForm" element={<PrescriptionForm/>} />
+
             </Routes>
           </Stack>
         </Stack>

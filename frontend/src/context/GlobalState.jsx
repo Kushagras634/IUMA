@@ -35,6 +35,7 @@ export const GlobalProvider = ({ children }) => {
       value={{
         token: state.token,
         email: state.email,
+        id: state.id,
         profession: state.profession,
         isLoggedIn: state.isLoggedIn,
         name: state.name,
