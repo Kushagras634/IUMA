@@ -15,7 +15,7 @@ const DashboardHeader = () => {
   const {name, isLoggedIn} = useContext(GlobalContext)
   const navigate = useNavigate()
   useEffect(()=>{
-    console.log(name)
+    // console.log(name)
     if(!isLoggedIn){
       navigate('/login')
       toast("First Login", {

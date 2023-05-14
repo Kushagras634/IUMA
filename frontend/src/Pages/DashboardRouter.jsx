@@ -24,6 +24,7 @@ import LabDashboard from "./Labs/LabDashboard";
 import LabRecords from "./Labs/LabRecords";
 import LabServices from "./Labs/LabServices";
 import VerifyPatient from "./Doctors/VerifyPatient";
+import PrescriptionForm from "./Doctors/PrescriptionForm";
 const DashboardRouter = () => {
   const { profession } = useContext(GlobalContext);
   const navigate = useNavigate();
@@ -69,6 +70,8 @@ const DashboardRouter = () => {
               <Route path="/appointments" element={<DoctorAppointment />} />
               <Route path="/history" element={<DoctorHistory />} />
               <Route path="/verifyPatient" element={<VerifyPatient/>} />
+              <Route path="/prescriptionForm" element={<PrescriptionForm/>} />
+
             </Routes>
           </Stack>
         </Stack>

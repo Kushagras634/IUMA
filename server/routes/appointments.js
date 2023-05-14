@@ -7,6 +7,8 @@ router.post('/searchDoc', appointmentController.SearchDoctors);
 router.post('/getDoc', appointmentController.getDoctor);
 router.post('/bookAppointment', appointmentController.BookAppointment);
 router.post('/getAppointments', appointmentController.getAppointments);
+router.post('/verifyAppointment', appointmentController.verifyAppointment);
+
 
 
 

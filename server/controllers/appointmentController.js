@@ -75,3 +75,22 @@ exports.getAppointments = async (req, res) => {
       res.status(500).send(error);
     });
 };
+
+exports.verifyAppointment = async (req, res) => {
+  const {id, qr, otp} = req.body;
+  // console.log(data);
+  conn
+    .collection("appointments")
+    .findOne({ doctorId: new ObjectId(id), otp: otp, qr: qr })
+    .then((data) => {
+      console.log(data);
+      if (data) {
+        res.status(201).send("Match Found");
+      } else {
+        res.status(201).send("No Match");
+      }
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+};

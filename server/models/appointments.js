@@ -35,6 +35,21 @@ const AppointmentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    qr:{
+      type:String,
+      required:true
+    },
+    otp: {
+      type:String,
+      required:true
+    },
+    isVerified:{
+      type:Boolean,
+      required: true,
+    },
+    prescription:{
+      
+    },
     status: {
       type: String,
       enum: ["booked", "confirmed", "canceled", "completed"],
